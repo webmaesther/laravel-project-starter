@@ -1,13 +1,11 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "webmaesther/laravel-project-starter",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": [
-        "laravel",
-        "framework"
-    ],
+    "description": "My Laravel Starter Kit",
+    "keywords": ["php", "laravel"],
     "license": "MIT",
+    "version": "1.0.0",
     "require": {
         "php": "^8.4",
         "laravel/framework": "^12.0",
