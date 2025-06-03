@@ -69,7 +69,7 @@
             "@php artisan config:clear --ansi",
             "vendor/bin/pint --test",
             "vendor/bin/phpstan",
-            "vendor/bin/pest --parallel"
+            "vendor/bin/pest --parallel --coverage --min=100"
         ]
     },
     "extra": {
