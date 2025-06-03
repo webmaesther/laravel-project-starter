@@ -1,0 +1,61 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Models\User;
+use App\Providers\AppServiceProvider;
+use Database\Factories\UserFactory;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
+
+use function Pest\Laravel\assertDatabaseCount;
+
+covers([
+    User::class,
+    AppServiceProvider::class,
+]);
+
+describe('User', function () {
+    test('fields are unguarded', function () {
+        User::create([
+            'name' => 'Test User',
+            'email' => 'test@email.com',
+            'password' => 'password',
+        ]);
+
+        assertDatabaseCount(User::class, 1);
+    });
+
+    test('password and remember token is removed from array data', function () {
+        UserFactory::new()->create([
+            'password' => 'password',
+            'remember_token' => 'remember_token',
+        ]);
+
+        assertDatabaseCount(User::class, 1);
+        expect(User::first()->toArray())
+            ->not->toHaveKeys(['password', 'remember_token']);
+    });
+
+    test('password is hashed', function () {
+        $password = fake()->password();
+
+        UserFactory::new()->create([
+            'password' => $password,
+        ]);
+
+        assertDatabaseCount(User::class, 1);
+        expect(Hash::check($password, User::first()->password))
+            ->toBeTrue();
+    });
+
+    test('email verified at is a datetime', function () {
+        UserFactory::new()->create([
+            'email_verified_at' => fake()->dateTime(),
+        ]);
+
+        assertDatabaseCount(User::class, 1);
+        expect(User::first()->email_verified_at)
+            ->toBeInstanceOf(Carbon::class);
+    });
+});
