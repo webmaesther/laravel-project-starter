@@ -74,10 +74,10 @@
         ],
         "test": [
             "@php artisan config:clear --ansi",
-            "vendor/bin/pint --test",
-            "vendor/bin/phpstan",
-            "vendor/bin/pest --parallel --coverage --min=100",
-            "vendor/bin/pest --mutate --covered-only --parallel"
+            "pint --test",
+            "phpstan",
+            "pest --parallel --coverage --min=100",
+            "pest --mutate --covered-only --parallel"
         ]
     },
     "extra": {
