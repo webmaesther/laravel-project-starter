@@ -8,6 +8,7 @@
     "version": "1.0.0",
     "require": {
         "php": "^8.4",
+        "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/horizon": "^5.32",
         "laravel/octane": "^2.9",
@@ -18,6 +19,7 @@
         "laravel/scout": "^10.15",
         "laravel/telescope": "^5.9",
         "laravel/tinker": "^2.10.1",
+        "tightenco/ziggy": "^2.5",
         "typesense/typesense-php": "^5.1"
     },
     "require-dev": {
