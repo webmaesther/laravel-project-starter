@@ -47,12 +47,21 @@ return [
     */
     'commands' => [
         'HTTP' => Command::from('php artisan octane:start --watch'),
-        'Sail' => Command::from('sail up')->interactive(),
-        'Queue' => Command::from('php artisan horizon'),
-        'Vite' => Command::from('npm run dev'),
-        'Reverb' => Command::from('php artisan reverb:start --debug'),
+        'Tinker' => Command::from('php artisan tinker')->interactive(),
+        'Sail' => Command::from('vendor/bin/sail up')->interactive(),
+        'Pail' => Command::from('php artisan pail -vv'),
         'Dumps' => Command::from('php artisan solo:dumps'),
-        'Logs' => Command::from('php artisan pail -vv'),
+        'Horizon' => Command::from('php artisan horizon'),
+        'Reverb' => Command::from('php artisan reverb:start --debug'),
+        'Vite' => Command::from('npm run dev'),
+        'Tasks' => Command::from('php artisan schedule:work'),
+
+        // Lazy commands...
+        'Rector' => Command::from('vendor/bin/rector')->lazy(),
+        'Pint' => Command::from('vendor/bin/pint')->lazy(),
+        'PHPStan' => Command::from('vendor/bin/phpstan')->lazy(),
+        'Pest' => Command::from('vendor/bin/pest --parallel')->lazy(),
+        'Dusk' => Command::from('php artisan dusk')->lazy(),
     ],
 
     /**
