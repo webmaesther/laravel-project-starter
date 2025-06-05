@@ -3,16 +3,14 @@
 declare(strict_types=1);
 
 use App\Models\User;
-use App\Providers\AppServiceProvider;
+use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 use function Pest\Laravel\assertDatabaseCount;
 
 covers([
     User::class,
-    AppServiceProvider::class,
 ]);
 
 describe('User', function () {
@@ -56,6 +54,6 @@ describe('User', function () {
 
         assertDatabaseCount(User::class, 1);
         expect(User::first()->email_verified_at)
-            ->toBeInstanceOf(Carbon::class);
+            ->toBeInstanceOf(CarbonImmutable::class);
     });
 });
