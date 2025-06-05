@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use SoloTerm\Solo\Commands\Command;
-use SoloTerm\Solo\Commands\EnhancedTailCommand;
 use SoloTerm\Solo\Hotkeys;
 use SoloTerm\Solo\Themes;
 
@@ -48,11 +47,12 @@ return [
     */
     'commands' => [
         'HTTP' => Command::from('php artisan octane:start --watch'),
-        'Vite' => Command::from('npm run dev'),
+        'Sail' => Command::from('sail up')->interactive(),
         'Queue' => Command::from('php artisan queue:work'),
+        'Vite' => Command::from('npm run dev'),
         'Reverb' => Command::from('php artisan reverb:start --debug'),
         'Dumps' => Command::from('php artisan solo:dumps'),
-        'Logs' => EnhancedTailCommand::file(storage_path('logs/laravel.log')),
+        'Logs' => Command::from('php artisan pail -vv'),
     ],
 
     /**
@@ -61,7 +61,7 @@ return [
      * PTY and some ANSI rendering things. Not all environments have Screen,
      * so you can turn it off for a slightly degraded experience.
      */
-    'use_screen' => (bool) env('SOLO_USE_SCREEN', false),
+    'use_screen' => (bool) env('SOLO_USE_SCREEN', true),
 
     /*
     |--------------------------------------------------------------------------

@@ -7,6 +7,7 @@
   - xdebug
 - [Composer](https://getcomposer.org/)
 - [NodeJS](https://nodejs.org/) > 22.14
+- [screen](https://formulae.brew.sh/formula/screen) > v5
 
 ## Setup
 
