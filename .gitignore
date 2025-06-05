@@ -3,6 +3,7 @@
 .env
 .env.backup
 .env.production
+.env.dusk.local
 .phpactor.json
 .phpunit.result.cache
 /.fleet
@@ -22,5 +23,6 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+phpunit.dusk.xml
 Thumbs.db
 yarn-error.log
