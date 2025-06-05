@@ -48,7 +48,7 @@ return [
     'commands' => [
         'HTTP' => Command::from('php artisan octane:start --watch'),
         'Sail' => Command::from('sail up')->interactive(),
-        'Queue' => Command::from('php artisan queue:work'),
+        'Queue' => Command::from('php artisan horizon'),
         'Vite' => Command::from('npm run dev'),
         'Reverb' => Command::from('php artisan reverb:start --debug'),
         'Dumps' => Command::from('php artisan solo:dumps'),
