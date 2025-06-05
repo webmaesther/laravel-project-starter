@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
+use Override;
 
 final class HomePage extends Page
 {
@@ -19,6 +20,7 @@ final class HomePage extends Page
     /**
      * Assert that the browser is on the page.
      */
+    #[Override]
     public function assert(Browser $browser): void
     {
         //
@@ -29,6 +31,7 @@ final class HomePage extends Page
      *
      * @return array<string, string>
      */
+    #[Override]
     public function elements(): array
     {
         return [

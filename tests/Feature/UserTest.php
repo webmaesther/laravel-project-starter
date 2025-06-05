@@ -13,8 +13,8 @@ covers([
     User::class,
 ]);
 
-describe('User', function () {
-    test('fields are unguarded', function () {
+describe('User', function (): void {
+    test('fields are unguarded', function (): void {
         User::create([
             'name' => 'Test User',
             'email' => 'test@email.com',
@@ -24,7 +24,7 @@ describe('User', function () {
         assertDatabaseCount(User::class, 1);
     });
 
-    test('password and remember token is removed from array data', function () {
+    test('password and remember token is removed from array data', function (): void {
         UserFactory::new()->create([
             'password' => 'password',
             'remember_token' => 'remember_token',
@@ -35,7 +35,7 @@ describe('User', function () {
             ->not->toHaveKeys(['password', 'remember_token']);
     });
 
-    test('password is hashed', function () {
+    test('password is hashed', function (): void {
         $password = fake()->password();
 
         UserFactory::new()->create([
@@ -47,7 +47,7 @@ describe('User', function () {
             ->toBeTrue();
     });
 
-    test('email verified at is a datetime', function () {
+    test('email verified at is a datetime', function (): void {
         UserFactory::new()->create([
             'email_verified_at' => fake()->dateTime(),
         ]);
