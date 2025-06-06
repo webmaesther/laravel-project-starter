@@ -1,2 +1,11 @@
-composer test
-npm run check
+git diff --exit-code
+
+if [ -z "$(git status --porcelain)" ]; then
+  # No changes
+  echo "No changes\n"
+  exit 1
+else
+  # Uncommitted changes
+  composer test
+  npm run check
+fi
