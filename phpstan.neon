@@ -4,6 +4,16 @@ includes:
 
 parameters:
     paths:
-        - app/
+        - app
+        - bootstrap
+        - database/factories
+        - routes
+        - config
     level: max
     checkOctaneCompatibility: true
+    checkModelProperties: true
+    treatPhpDocTypesAsCertain: false
+    excludePaths:
+        - '**/ide-helper.php'
+        - '**/ide_helper_models.php'
+        - '**/phpstorm.meta.php'
