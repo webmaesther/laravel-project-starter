@@ -96,6 +96,7 @@
         ],
         "test": [
             "@php artisan config:clear --ansi",
+            "rector --dry-run",
             "pint --test",
             "phpstan",
             "pest --parallel --coverage --min=100",
