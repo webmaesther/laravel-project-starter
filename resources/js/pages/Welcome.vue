@@ -189,6 +189,7 @@ import { Head } from '@inertiajs/vue3';
                                 stroke-width="1"
                             />
                         </g>
+                        <!-- @vue-ignore -->
                         <g
                             :style="{ mixBlendMode: 'plus-darker' }"
                             class="translate-y-0 opacity-100 transition-all delay-300 duration-750 starting:translate-y-4 starting:opacity-0"
