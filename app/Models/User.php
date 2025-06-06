@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-final class User extends \Illuminate\Foundation\Auth\User
+use Illuminate\Auth\MustVerifyEmail as VerifiesEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+final class User extends Authenticatable implements MustVerifyEmail
 {
+    use VerifiesEmail;
+
     /** @var list<string> */
     protected $hidden = [
         'password',
