@@ -41,7 +41,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../lib/*",
+            "url": "../*",
             "options": {
                 "symlink": false
             }
