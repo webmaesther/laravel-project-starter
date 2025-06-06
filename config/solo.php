@@ -46,6 +46,7 @@ return [
     |
     */
     'commands' => [
+        // Environment...
         'HTTP' => Command::from('php artisan octane:start --watch'),
         'Tinker' => Command::from('php artisan tinker')->interactive(),
         'Sail' => Command::from('vendor/bin/sail up')->interactive(),
@@ -53,14 +54,21 @@ return [
         'Dumps' => Command::from('php artisan solo:dumps'),
         'Horizon' => Command::from('php artisan horizon'),
         'Reverb' => Command::from('php artisan reverb:start --debug'),
-        'Vite' => Command::from('npm run dev'),
         'Tasks' => Command::from('php artisan schedule:work'),
+        'Vite' => Command::from('npm run dev'),
 
-        // Lazy commands...
+        // Tests...
+        'Pest' => Command::from('vendor/bin/pest --watch=app,src,routes,tests'),
+        'Vitest' => Command::from('npm run test'),
+
+        // Helpers...
         'Rector' => Command::from('vendor/bin/rector')->lazy(),
         'Pint' => Command::from('vendor/bin/pint')->lazy(),
-        'PHPStan' => Command::from('vendor/bin/phpstan')->lazy(),
-        'Pest' => Command::from('vendor/bin/pest --parallel')->lazy(),
+        'Eslint' => Command::from('npm run lint')->lazy(),
+        'Prettier' => Command::from('npm run format')->lazy(),
+
+        // Validators
+        'Typescript' => Command::from('npm run type:check')->lazy(),
         'Dusk' => Command::from('php artisan dusk')->lazy(),
     ],
 
