@@ -58,18 +58,21 @@ return [
         'Tasks' => Command::from('php artisan schedule:work'),
 
         // Tests...
-        'Pest' => Command::from('vendor/bin/pest --watch=app,src,routes,tests'),
-        'Vitest' => Command::from('npm run test'),
+        'Pest' => Command::from('vendor/bin/pest --watch=app,src,routes,tests')->lazy(),
+        'Vitest' => Command::from('npm run test')->lazy(),
 
         // Validators
         'Types' => Command::from('npm run type:check')->lazy(),
         'Dusk' => Command::from('php artisan dusk')->lazy(),
+        'Peck' => Command::from('vendor/bin/peck')->lazy(),
 
         // Helpers...
         'Rector' => Command::from('vendor/bin/rector')->lazy(),
         'Pint' => Command::from('vendor/bin/pint')->lazy(),
         'Eslint' => Command::from('npm run lint')->lazy(),
         'Prettier' => Command::from('npm run format')->lazy(),
+
+        // Frontend
         'Dev' => Command::from('npm run dev')->lazy(),
         'Build' => Command::from('npm run build:ssr')->lazy(),
     ],
