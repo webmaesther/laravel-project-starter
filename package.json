@@ -10,6 +10,7 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
+        "test": "vitest",
         "prepare": "husky"
     },
     "dependencies": {
@@ -50,6 +51,7 @@
         "prettier-plugin-tailwindcss": "^0.6.11",
         "pusher-js": "^8.4.0",
         "typescript-eslint": "^8.23.0",
+        "vitest": "^3.2.2",
         "vue-tsc": "^2.2.4"
     },
     "optionalDependencies": {
