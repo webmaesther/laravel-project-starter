@@ -36,6 +36,7 @@
         "ext-zip": "*",
         "lib-pcre": ">=7.0",
         "barryvdh/laravel-debugbar": "^3.15",
+        "driftingly/rector-laravel": "^2.0",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
         "laravel/dusk": "^8.3",

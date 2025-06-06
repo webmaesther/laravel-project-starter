@@ -15,7 +15,7 @@ covers([
 
 describe('User', function (): void {
     test('fields are unguarded', function (): void {
-        User::create([
+        User::query()->create([
             'name' => 'Test User',
             'email' => 'test@email.com',
             'password' => 'password',
@@ -31,7 +31,7 @@ describe('User', function (): void {
         ]);
 
         assertDatabaseCount(User::class, 1);
-        expect(User::first()->toArray())
+        expect(User::query()->first()->toArray())
             ->not->toHaveKeys(['password', 'remember_token']);
     });
 
@@ -43,7 +43,7 @@ describe('User', function (): void {
         ]);
 
         assertDatabaseCount(User::class, 1);
-        expect(Hash::check($password, User::first()->password))
+        expect(Hash::check($password, User::query()->first()->password))
             ->toBeTrue();
     });
 
@@ -53,7 +53,7 @@ describe('User', function (): void {
         ]);
 
         assertDatabaseCount(User::class, 1);
-        expect(User::first()->email_verified_at)
+        expect(User::query()->first()->email_verified_at)
             ->toBeInstanceOf(CarbonImmutable::class);
     });
 });
