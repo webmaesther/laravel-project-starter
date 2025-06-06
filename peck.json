@@ -10,7 +10,8 @@
             "ssr",
             "debugbar",
             "tsconfig",
-            "vitest"
+            "vitest",
+            "composables"
         ],
         "paths": []
     }
