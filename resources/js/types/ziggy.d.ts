@@ -1,16 +1,11 @@
-import { SharedData } from '@/types/index';
-import type { route as routeFn } from 'ziggy-js';
+import { RouteParams, ValidRouteName } from 'ziggy-js';
 
 declare global {
-    const route: routeFn;
+    function route<T extends ValidRouteName>(name: T, params?: RouteParams<T> | undefined, absolute?: boolean): string;
 }
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
-        route: routeFn;
+        route: <T extends ValidRouteName>(name: T, params?: RouteParams<T> | undefined, absolute?: boolean) => string;
     }
-}
-
-declare module '@inertiajs/core' {
-    type PageProps = SharedData;
 }
