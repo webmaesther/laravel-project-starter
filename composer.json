@@ -8,6 +8,8 @@
     "version": "1.0.0",
     "require": {
         "php": "^8.4",
+        "ext-swoole": "*",
+        "ext-redis": "*",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/cashier": "^15.6",
         "laravel/fortify": "^1.25",
@@ -26,6 +28,13 @@
         "typesense/typesense-php": "^5.1"
     },
     "require-dev": {
+        "ext-xdebug": "*",
+        "ext-pcntl": "*",
+        "ext-posix": "*",
+        "ext-json": "*",
+        "ext-zip": "*",
+        "ext-mbstring": "*",
+        "lib-pcre": ">=7.0",
         "barryvdh/laravel-debugbar": "^3.15",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
