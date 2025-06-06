@@ -4,7 +4,6 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { configureEcho } from '@laravel/echo-vue';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, DefineComponent, h } from 'vue';
-import { ZiggyVue } from 'ziggy-js';
 
 configureEcho({
     broadcaster: 'reverb',
@@ -18,10 +17,9 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue)
             .mount(el);
     },
     progress: {
         color: '#4B5563',
     },
-});
+}).then();
