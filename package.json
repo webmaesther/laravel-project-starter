@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "prepare": "husky",
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
@@ -10,8 +11,10 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
+        "lint:check": "eslint .",
         "test": "vitest",
-        "prepare": "husky"
+        "test:check": "vitest --run",
+        "check": "$npm_execpath run type:check && $npm_execpath run lint:check && $npm_execpath run format:check && $npm_execpath run test:check"
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.0.0",

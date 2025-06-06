@@ -1,1 +1,2 @@
 composer test
+npm run check
