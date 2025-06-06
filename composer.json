@@ -93,6 +93,7 @@
             "git init && git add . && git commit -m \"Install Starter Kit\""
         ],
         "dev": [
+            "Composer\\Config::disableProcessTimeout",
             "@php artisan solo"
         ],
         "test": [
@@ -113,7 +114,6 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
-        "process-timeout": 0,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
