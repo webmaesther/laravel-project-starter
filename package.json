@@ -23,6 +23,7 @@
         "@vueuse/core": "^13.3.0",
         "axios": "^1.9.0",
         "class-variance-authority": "^0.7.0",
+        "daisyui": "^5.0.0",
         "husky": "^9.1.0",
         "laravel-echo": "^2.1.0",
         "laravel-precognition-vue": "^0.7.0",
