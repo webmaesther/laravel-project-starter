@@ -12,7 +12,9 @@
             "tsconfig",
             "vitest",
             "composables",
-            "unsplash"
+            "unsplash",
+            "cors",
+            "nginx"
         ],
         "paths": []
     }
