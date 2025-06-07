@@ -63,7 +63,6 @@ return [
 
         // Validators
         'Types' => Command::from('npm run type:check')->lazy(),
-        'Dusk' => Command::from('php artisan dusk')->lazy(),
         'Peck' => Command::from('vendor/bin/peck')->lazy(),
 
         // Helpers...
