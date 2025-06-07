@@ -1,4 +1,4 @@
-import Welcome from '@/pages/Welcome.vue';
+import Welcome from '@/pages/Home.vue';
 import { render, screen } from '@testing-library/vue';
 import { describe } from 'node:test';
 import { expect, test } from 'vitest';
