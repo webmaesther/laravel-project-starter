@@ -25,7 +25,7 @@ final class FactoriesController
             'count' => ['numeric', 'integer'],
         ]);
 
-        $model = (string) $request->string('model');
+        $model = $request->string('model')->value();
 
         if (! is_subclass_of($model, Model::class)) {
             throw ValidationException::withMessages([
