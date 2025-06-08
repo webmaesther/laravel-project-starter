@@ -14,7 +14,9 @@
             "composables",
             "unsplash",
             "cors",
-            "nginx"
+            "nginx",
+            "linkedin",
+            "openid"
         ],
         "paths": []
     }

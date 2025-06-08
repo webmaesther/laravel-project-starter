@@ -104,7 +104,7 @@
             "pint --test",
             "phpstan",
             "pest --parallel --coverage --min=100",
-            "pest --mutate --covered-only --parallel"
+            "pest --mutate --covered-only --parallel --min=100"
         ]
     },
     "extra": {

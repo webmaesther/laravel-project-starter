@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware
             ->statefulApi()
-            ->api([
+            ->api(prepend: [
                 ForceJsonResponse::class,
             ])
             ->web(append: [

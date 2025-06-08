@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\User\Models\FederatedAccount;
 use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail as VerifiesEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 final class User extends Authenticatable implements MustVerifyEmail
@@ -22,6 +24,12 @@ final class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+
+    /** @return HasMany<FederatedAccount, $this> */
+    public function federated_accounts(): HasMany
+    {
+        return $this->hasMany(FederatedAccount::class);
+    }
 
     /** @return array<string, string> */
     protected function casts(): array
