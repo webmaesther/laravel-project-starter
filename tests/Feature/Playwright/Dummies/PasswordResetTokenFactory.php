@@ -6,6 +6,7 @@ namespace Tests\Feature\Playwright\Dummies;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Override;
+use Tests\Feature\Playwright\Dummies\Models\PasswordResetToken;
 
 final class PasswordResetTokenFactory extends Factory
 {

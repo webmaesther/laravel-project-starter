@@ -6,10 +6,10 @@ use App\Http\Middleware\ForceJsonResponse;
 use App\Http\Middleware\UnlessProduction;
 use App\Models\User;
 use App\Playwright\Http\Controllers\Api\FactoriesController;
-use Tests\Feature\Playwright\Dummies\Feature;
-use Tests\Feature\Playwright\Dummies\Fruit;
-use Tests\Feature\Playwright\Dummies\PasswordResetToken;
-use Tests\Feature\Playwright\Dummies\Subscription;
+use Tests\Feature\Playwright\Dummies\Models\Feature;
+use Tests\Feature\Playwright\Dummies\Models\Fruit;
+use Tests\Feature\Playwright\Dummies\Models\PasswordResetToken;
+use Tests\Feature\Playwright\Dummies\Models\Subscription;
 
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseEmpty;
@@ -20,6 +20,7 @@ covers([
     FactoriesController::class,
     ForceJsonResponse::class,
     UnlessProduction::class,
+    App\Http\Resources\User::class,
 ]);
 
 describe('Factories', function (): void {
@@ -92,19 +93,23 @@ describe('Factories', function (): void {
         ]);
     });
 
-    test('creates a new instance of a model with a factory', function (string $model): void {
+    test('creates a new instance of a model with a factory', function (string $model, array $structure): void {
         assertDatabaseEmpty($model);
 
         $response = post(route('api.playwright.factories.store'), [
             'model' => $model,
         ]);
 
-        $response->assertNoContent();
-        $response->assertContent('');
+        $response->assertCreated();
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => $structure,
+            ],
+        ]);
         assertDatabaseCount($model, 1);
     })->with([
-        ['model' => User::class],
-        ['model' => PasswordResetToken::class],
+        ['model' => User::class, 'structure' => ['id', 'name', 'email']],
+        ['model' => PasswordResetToken::class,  'structure' => ['id', 'email', 'token']],
     ]);
 
     test('validates the state to be an array', function (): void {
@@ -139,8 +144,8 @@ describe('Factories', function (): void {
             'state' => $state,
         ]);
 
-        $response->assertNoContent();
-        $response->assertContent('');
+        $response->assertCreated();
+        $response->assertJsonFragment($state);
         assertDatabaseCount($model, 1);
         assertDatabaseHas($model, $state);
     })->with([
@@ -181,8 +186,8 @@ describe('Factories', function (): void {
             'count' => $count,
         ]);
 
-        $response->assertNoContent();
-        $response->assertContent('');
+        $response->assertCreated();
+        $response->assertJsonCount($count, 'data');
         assertDatabaseCount($model, $count);
     })->with([
         ['model' => User::class],
