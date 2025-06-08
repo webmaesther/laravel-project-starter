@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Middleware\ForceJsonResponse;
+use App\Http\Middleware\UnlessProduction;
 use App\Models\User;
 use App\Playwright\Http\Controllers\Api\CommandsController;
 use Tests\Feature\Playwright\Dummies\DummyDatabaseSeeder;
@@ -16,9 +17,20 @@ use function Pest\Laravel\post;
 covers([
     CommandsController::class,
     ForceJsonResponse::class,
+    UnlessProduction::class,
 ]);
 
 describe('Commands', function (): void {
+
+    test('it returns 404 on production', function (): void {
+        app()->bind('env', fn (): string => 'production');
+        expect(app()->isProduction())->toBeTrue();
+
+        $response = post(route('api.playwright.commands.store'));
+
+        $response->assertNotFound();
+        $response->assertJson(['message' => 'Not Found']);
+    });
 
     test('validates the command as required', function (): void {
         $response = post(route('api.playwright.commands.store'));
@@ -59,6 +71,7 @@ describe('Commands', function (): void {
         ]);
 
         $response->assertNoContent();
+        $response->assertContent('');
         assertDatabaseCount(User::class, 1);
     });
 
@@ -70,6 +83,7 @@ describe('Commands', function (): void {
         ]);
 
         $response->assertNoContent();
+        $response->assertContent('');
 
         expect(app()->isDownForMaintenance())->toBeTrue();
     });
@@ -109,6 +123,7 @@ describe('Commands', function (): void {
         ]);
 
         $response->assertNoContent();
+        $response->assertContent('');
         assertDatabaseCount(User::class, 1);
         assertDatabaseHas(User::class, DummyDatabaseSeeder::$user);
     });
@@ -124,6 +139,7 @@ describe('Commands', function (): void {
         ]);
 
         $response->assertNoContent();
+        $response->assertContent('');
 
         expect(app()->isDownForMaintenance())->toBeTrue();
         get('/')->assertInternalServerError();

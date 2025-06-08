@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Middleware\ForceJsonResponse;
+use App\Http\Middleware\UnlessProduction;
 use App\Models\User;
 use App\Playwright\Http\Controllers\Api\FactoriesController;
 use Tests\Feature\Playwright\Dummies\Feature;
@@ -18,15 +19,25 @@ use function Pest\Laravel\post;
 covers([
     FactoriesController::class,
     ForceJsonResponse::class,
+    UnlessProduction::class,
 ]);
 
 describe('Factories', function (): void {
+
+    test('it returns 404 on production', function (): void {
+        app()->bind('env', fn (): string => 'production');
+        expect(app()->isProduction())->toBeTrue();
+
+        $response = post(route('api.playwright.factories.store'));
+
+        $response->assertNotFound();
+        $response->assertJson(['message' => 'Not Found']);
+    });
 
     test('validates the model field as required', function (): void {
         $response = post(route('api.playwright.factories.store'));
 
         $response->assertUnprocessable();
-        $response->assertJsonStructure();
         $response->assertJsonValidationErrors([
             'model' => 'The model field is required.',
         ]);
@@ -89,6 +100,7 @@ describe('Factories', function (): void {
         ]);
 
         $response->assertNoContent();
+        $response->assertContent('');
         assertDatabaseCount($model, 1);
     })->with([
         ['model' => User::class],
@@ -128,6 +140,7 @@ describe('Factories', function (): void {
         ]);
 
         $response->assertNoContent();
+        $response->assertContent('');
         assertDatabaseCount($model, 1);
         assertDatabaseHas($model, $state);
     })->with([
@@ -169,6 +182,7 @@ describe('Factories', function (): void {
         ]);
 
         $response->assertNoContent();
+        $response->assertContent('');
         assertDatabaseCount($model, $count);
     })->with([
         ['model' => User::class],
