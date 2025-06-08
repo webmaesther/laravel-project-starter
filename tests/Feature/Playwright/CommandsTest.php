@@ -28,17 +28,17 @@ describe('Commands', function (): void {
 
         $response = post(route('api.playwright.commands.store'));
 
-        $response->assertNotFound();
-        $response->assertJson(['message' => 'Not Found']);
+        $response->assertNotFound()
+            ->assertJson(['message' => 'Not Found']);
     });
 
     test('validates the command as required', function (): void {
         $response = post(route('api.playwright.commands.store'));
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'command' => 'The command field is required.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'command' => 'The command field is required.',
+            ]);
     });
 
     test('validates the command to be string', function (): void {
@@ -46,10 +46,10 @@ describe('Commands', function (): void {
             'command' => 123,
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'command' => 'The command field must be a string.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'command' => 'The command field must be a string.',
+            ]);
     });
 
     test('validates the command to be an existing artisan command', function (): void {
@@ -57,10 +57,10 @@ describe('Commands', function (): void {
             'command' => 'missing-command',
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'command' => 'The command field must be an existing artisan command.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'command' => 'The command field must be an existing artisan command.',
+            ]);
     });
 
     test('runs the artisan db:seed command', function (): void {
@@ -70,8 +70,8 @@ describe('Commands', function (): void {
             'command' => 'db:seed',
         ]);
 
-        $response->assertNoContent();
-        $response->assertContent('');
+        $response->assertNoContent()
+            ->assertContent('');
         assertDatabaseCount(User::class, 1);
     });
 
@@ -82,8 +82,8 @@ describe('Commands', function (): void {
             'command' => 'down',
         ]);
 
-        $response->assertNoContent();
-        $response->assertContent('');
+        $response->assertNoContent()
+            ->assertContent('');
 
         expect(app()->isDownForMaintenance())->toBeTrue();
     });
@@ -94,10 +94,10 @@ describe('Commands', function (): void {
             'parameters' => 'not-an-array',
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'parameters' => 'The parameters field must be an array.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'parameters' => 'The parameters field must be an array.',
+            ]);
     });
 
     test('validates the parameters to be an array with keys', function (): void {
@@ -106,10 +106,10 @@ describe('Commands', function (): void {
             'parameters' => ['array', 'without', 'keys'],
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'parameters' => 'The parameters field must be an array with keys.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'parameters' => 'The parameters field must be an array with keys.',
+            ]);
     });
 
     test('runs the artisan db:seed command with the class argument', function (): void {
@@ -122,8 +122,8 @@ describe('Commands', function (): void {
             ],
         ]);
 
-        $response->assertNoContent();
-        $response->assertContent('');
+        $response->assertNoContent()
+            ->assertContent('');
         assertDatabaseCount(User::class, 1);
         assertDatabaseHas(User::class, DummyDatabaseSeeder::$user);
     });
@@ -138,8 +138,8 @@ describe('Commands', function (): void {
             ],
         ]);
 
-        $response->assertNoContent();
-        $response->assertContent('');
+        $response->assertNoContent()
+            ->assertContent('');
 
         expect(app()->isDownForMaintenance())->toBeTrue();
         get('/')->assertInternalServerError();

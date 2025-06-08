@@ -31,17 +31,17 @@ describe('Factories', function (): void {
 
         $response = post(route('api.playwright.factories.store'));
 
-        $response->assertNotFound();
-        $response->assertJson(['message' => 'Not Found']);
+        $response->assertNotFound()
+            ->assertJson(['message' => 'Not Found']);
     });
 
     test('validates the model field as required', function (): void {
         $response = post(route('api.playwright.factories.store'));
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'model' => 'The model field is required.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'model' => 'The model field is required.',
+            ]);
     });
 
     test('validates the model field to be a string', function (): void {
@@ -49,10 +49,10 @@ describe('Factories', function (): void {
             'model' => 123,
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'model' => 'The model field must be a string.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'model' => 'The model field must be a string.',
+            ]);
     });
 
     test('validates the model field to be an eloquent model', function (): void {
@@ -60,10 +60,10 @@ describe('Factories', function (): void {
             'model' => Fruit::class,
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'model' => 'This class is not an eloquent model.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'model' => 'This class is not an eloquent model.',
+            ]);
     });
 
     test('validates the model field to have a factory', function (): void {
@@ -73,10 +73,10 @@ describe('Factories', function (): void {
             'model' => Feature::class,
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'model' => 'This model does not have a factory.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'model' => 'This model does not have a factory.',
+            ]);
         assertDatabaseEmpty(Feature::class);
     });
 
@@ -87,10 +87,10 @@ describe('Factories', function (): void {
             'model' => Subscription::class,
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'model' => 'The factory of this model is not an eloquent factory.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'model' => 'The factory of this model is not an eloquent factory.',
+            ]);
     });
 
     test('creates a new instance of a model with a factory', function (string $model, array $structure): void {
@@ -100,12 +100,12 @@ describe('Factories', function (): void {
             'model' => $model,
         ]);
 
-        $response->assertCreated();
-        $response->assertJsonStructure([
-            'data' => [
-                '*' => $structure,
-            ],
-        ]);
+        $response->assertCreated()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => $structure,
+                ],
+            ]);
         assertDatabaseCount($model, 1);
     })->with([
         ['model' => User::class, 'structure' => ['id', 'name', 'email']],
@@ -118,10 +118,10 @@ describe('Factories', function (): void {
             'state' => 'not-an-array',
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'state' => 'The state field must be an array.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'state' => 'The state field must be an array.',
+            ]);
     });
 
     test('validates the state to be an array with keys', function (): void {
@@ -130,10 +130,10 @@ describe('Factories', function (): void {
             'state' => ['array', 'without', 'keys'],
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'state' => 'The state field must be an array with keys.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'state' => 'The state field must be an array with keys.',
+            ]);
     });
 
     test('creates a new instance of the model with the given state', function (string $model, array $state): void {
@@ -144,8 +144,8 @@ describe('Factories', function (): void {
             'state' => $state,
         ]);
 
-        $response->assertCreated();
-        $response->assertJsonFragment($state);
+        $response->assertCreated()
+            ->assertJsonFragment($state);
         assertDatabaseCount($model, 1);
         assertDatabaseHas($model, $state);
     })->with([
@@ -159,10 +159,10 @@ describe('Factories', function (): void {
             'count' => 'not-a-number',
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'count' => 'The count field must be a number.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'count' => 'The count field must be a number.',
+            ]);
     });
 
     test('validates the count to be an integer', function (): void {
@@ -171,10 +171,10 @@ describe('Factories', function (): void {
             'count' => 1.23,
         ]);
 
-        $response->assertUnprocessable();
-        $response->assertJsonValidationErrors([
-            'count' => 'The count field must be an integer.',
-        ]);
+        $response->assertUnprocessable()
+            ->assertJsonValidationErrors([
+                'count' => 'The count field must be an integer.',
+            ]);
     });
 
     test('creates multiple instances of a model with a factory', function (string $model): void {
@@ -186,8 +186,8 @@ describe('Factories', function (): void {
             'count' => $count,
         ]);
 
-        $response->assertCreated();
-        $response->assertJsonCount($count, 'data');
+        $response->assertCreated()
+            ->assertJsonCount($count, 'data');
         assertDatabaseCount($model, $count);
     })->with([
         ['model' => User::class],
