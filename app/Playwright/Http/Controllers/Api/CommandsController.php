@@ -25,11 +25,15 @@ final class CommandsController
             'in' => 'The :attribute field must be an existing artisan command.',
         ]);
 
-        Artisan::call(
+        $exitCode = Artisan::call(
             $request->string('command')->value(),
             $request->array('parameters')
         );
 
-        return response()->json(null, 204);
+        $success = $exitCode === 0;
+
+        return response()->json([
+            'success' => $success,
+        ], $success ? 200 : 422);
     }
 }

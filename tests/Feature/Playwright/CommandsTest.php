@@ -6,6 +6,8 @@ use App\Http\Middleware\ForceJsonResponse;
 use App\Http\Middleware\UnlessProduction;
 use App\Models\User;
 use App\Playwright\Http\Controllers\Api\CommandsController;
+use Illuminate\Support\Facades\Artisan;
+use Tests\Feature\Playwright\Dummies\Console\Commands\ErrorCommand;
 use Tests\Feature\Playwright\Dummies\DummyDatabaseSeeder;
 
 use function Pest\Laravel\assertDatabaseCount;
@@ -70,8 +72,8 @@ describe('Commands', function (): void {
             'command' => 'db:seed',
         ]);
 
-        $response->assertNoContent()
-            ->assertContent('');
+        $response->assertOk()
+            ->assertExactJson(['success' => true]);
         assertDatabaseCount(User::class, 1);
     });
 
@@ -82,8 +84,8 @@ describe('Commands', function (): void {
             'command' => 'down',
         ]);
 
-        $response->assertNoContent()
-            ->assertContent('');
+        $response->assertOk()
+            ->assertExactJson(['success' => true]);
 
         expect(app()->isDownForMaintenance())->toBeTrue();
     });
@@ -122,8 +124,8 @@ describe('Commands', function (): void {
             ],
         ]);
 
-        $response->assertNoContent()
-            ->assertContent('');
+        $response->assertOk()
+            ->assertExactJson(['success' => true]);
         assertDatabaseCount(User::class, 1);
         assertDatabaseHas(User::class, DummyDatabaseSeeder::$user);
     });
@@ -138,11 +140,22 @@ describe('Commands', function (): void {
             ],
         ]);
 
-        $response->assertNoContent()
-            ->assertContent('');
+        $response->assertOk()
+            ->assertExactJson(['success' => true]);
 
         expect(app()->isDownForMaintenance())->toBeTrue();
         get('/')->assertInternalServerError();
+    });
+
+    test('returns success false when the artisan command failed', function (): void {
+        Artisan::registerCommand(new ErrorCommand());
+
+        $response = post(route('api.playwright.commands.store'), [
+            'command' => 'error',
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertExactJson(['success' => false]);
     });
 
 });
