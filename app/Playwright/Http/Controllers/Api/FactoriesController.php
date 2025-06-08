@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Playwright\Http\Controllers\Api;
 
 use Closure;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
@@ -53,15 +52,10 @@ final class FactoriesController
         $count = $request->integer('count', 1);
 
         /** @var Factory<Model> $factory */
-        $models = $factory
+        return response()->json($factory
             ->state($state)
             ->count($count)
-            ->create();
-
-        /** @var Collection<int, Model> $models */
-        return $models
-            ->toResourceCollection()
-            ->response()
-            ->setStatusCode(201);
+            ->create()
+            ->toArray(), 201);
     }
 }

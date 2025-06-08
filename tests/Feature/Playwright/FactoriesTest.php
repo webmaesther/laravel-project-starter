@@ -20,7 +20,6 @@ covers([
     FactoriesController::class,
     ForceJsonResponse::class,
     UnlessProduction::class,
-    App\Http\Resources\User::class,
 ]);
 
 describe('Factories', function (): void {
@@ -102,9 +101,7 @@ describe('Factories', function (): void {
 
         $response->assertCreated()
             ->assertJsonStructure([
-                'data' => [
-                    '*' => $structure,
-                ],
+                '*' => $structure,
             ]);
         assertDatabaseCount($model, 1);
     })->with([
@@ -187,7 +184,7 @@ describe('Factories', function (): void {
         ]);
 
         $response->assertCreated()
-            ->assertJsonCount($count, 'data');
+            ->assertJsonCount($count);
         assertDatabaseCount($model, $count);
     })->with([
         ['model' => User::class],
