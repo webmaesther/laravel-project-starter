@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\User\Models;
 
-use App\Models\User;
 use App\User\Factories\FederatedAccountFactory;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\User\Models;
 
-use App\User\Models\FederatedAccount;
-use Database\Factories\UserFactory;
+use App\User\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail as VerifiesEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +17,8 @@ final class User extends Authenticatable implements MustVerifyEmail
     use HasFactory;
 
     use VerifiesEmail;
+
+    protected static string $factory = UserFactory::class;
 
     /** @var list<string> */
     protected $hidden = [

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Http\Middleware\ForceJsonResponse;
 use App\Http\Middleware\UnlessProduction;
-use App\Models\User;
 use App\Playwright\Http\Controllers\Api\CommandsController;
+use App\User\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Tests\Feature\Playwright\Dummies\Console\Commands\ErrorCommand;
 use Tests\Feature\Playwright\Dummies\DummyDatabaseSeeder;

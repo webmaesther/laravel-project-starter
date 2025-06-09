@@ -183,7 +183,7 @@ return [
         ],
         // 'max_total_results' => env('TYPESENSE_MAX_TOTAL_RESULTS', 1000),
         'model-settings' => [
-            App\Models\User::class => [
+            App\User\Models\User::class => [
                 'collection-schema' => [
                     'fields' => [
                         [

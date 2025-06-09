@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
 use App\User\Factories\FederatedAccountFactory;
+use App\User\Factories\UserFactory;
 use App\User\Http\Controllers\FederatedLoginController;
 use App\User\Http\Middleware\RedirectLocalHost;
 use App\User\Models\FederatedAccount;
+use App\User\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Uri;
 use Laravel\Socialite\Facades\Socialite;
@@ -23,6 +24,7 @@ covers([
     FederatedAccountFactory::class,
     RedirectLocalHost::class,
     User::class,
+    UserFactory::class,
 ]);
 
 describe('Federated Accounts', function (): void {

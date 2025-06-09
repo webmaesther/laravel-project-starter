@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
+use App\User\Factories\UserFactory;
+use App\User\Models\User;
 use Carbon\CarbonImmutable;
-use Database\Factories\UserFactory;
 use Illuminate\Support\Facades\Hash;
 
 use function Pest\Laravel\assertDatabaseCount;

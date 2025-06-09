@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\User\Models\FederatedAccount;
+use App\User\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;

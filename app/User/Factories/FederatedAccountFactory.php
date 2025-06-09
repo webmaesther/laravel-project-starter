@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\User\Factories;
 
-use App\Models\User;
 use App\User\Enums\SocialiteDriver;
 use App\User\Models\FederatedAccount;
+use App\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
