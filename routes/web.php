@@ -8,7 +8,7 @@ use App\User\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => inertia('Home'))->name('home');
-Route::get('/welcome', fn () => inertia('Welcome'))->name('welcome');
+Route::get('/auth', fn () => inertia('Auth'))->name('auth');
 
 Route::prefix('{driver}')
     ->whereIn('driver', SocialiteDriver::cases())
