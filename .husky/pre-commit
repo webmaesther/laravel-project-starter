@@ -8,5 +8,4 @@ else
   # Uncommitted changes
   composer test
   npm run check
-  vendor/bin/peck
 fi
