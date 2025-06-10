@@ -41,6 +41,6 @@ final class FederatedLoginController extends Controller
 
         Auth::login($account->user);
 
-        return to_route('home');
+        return to_route('dashboard');
     }
 }

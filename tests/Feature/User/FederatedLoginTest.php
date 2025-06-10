@@ -13,6 +13,7 @@ use Illuminate\Support\Uri;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialiteUser;
 
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertAuthenticatedAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
@@ -54,7 +55,7 @@ describe('Federated Accounts', function (): void {
 
         $response = get(route('federated.callback', $driver));
 
-        $response->assertRedirect(route('home'));
+        $response->assertRedirect(route('dashboard'));
         assertDatabaseCount(User::class, 2);
         assertDatabaseHas(User::class, [
             'name' => $user->getName(),
@@ -81,7 +82,7 @@ describe('Federated Accounts', function (): void {
 
         $response = get(route('federated.callback', $driver));
 
-        $response->assertRedirect(route('home'));
+        $response->assertRedirect(route('dashboard'));
         assertDatabaseCount(User::class, 1);
         assertDatabaseCount(FederatedAccount::class, 1);
         assertAuthenticatedAs($account->user);
@@ -102,7 +103,7 @@ describe('Federated Accounts', function (): void {
 
         $response = get(route('federated.callback', $driver));
 
-        $response->assertRedirect(route('home'));
+        $response->assertRedirect(route('dashboard'));
         assertDatabaseCount(User::class, 1);
         assertDatabaseCount(FederatedAccount::class, 1);
         assertAuthenticatedAs(User::query()->first());
@@ -115,7 +116,18 @@ describe('Federated Accounts', function (): void {
 
         $response->assertNotFound();
 
-    })->with(['callback', 'redirect']);
+    })->with(['redirect', 'callback']);
+
+    test('guards against authenticated users', function (string $driver, string $route): void {
+
+        $user = User::factory()->create();
+
+        $response = actingAs($user)
+            ->get(route("federated.{$route}", $driver));
+
+        $response->assertRedirect(route('dashboard'));
+
+    })->with(['redirect', 'callback']);
 
     test('redirects the callback with the correct scheme', function (string $driver): void {
         $app = Uri::of(config('app.url'));

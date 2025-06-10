@@ -8,12 +8,16 @@ use App\User\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => inertia('Home'))->name('home');
-Route::get('/auth', fn () => inertia('Auth'))->name('auth');
+
+Route::get('/auth', fn () => inertia('Auth'))->middleware('guest')->name('auth');
 
 Route::prefix('{driver}')
     ->whereIn('driver', SocialiteDriver::cases())
     ->name('federated.')
+    ->middleware('guest')
     ->group(function () {
         Route::get('redirect', [FederatedLoginController::class, 'redirect'])->name('redirect');
         Route::get('callback', [FederatedLoginController::class, 'callback'])->middleware(RedirectLocalHost::class)->name('callback');
     });
+
+Route::get('/dashboard', fn () => inertia('Dashboard'))->middleware('auth')->name('dashboard');
