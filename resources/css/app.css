@@ -1,3 +1,13 @@
 @import 'tailwindcss';
+
 @import 'tw-animate-css';
-@plugin "daisyui";
+
+@plugin "daisyui" {
+    logs: false;
+    exclude: rootscrollgutter;
+}
+
+:where(:root:has(.modal-open, .modal[open], .modal:target, .modal-toggle:checked, .drawer:not(.drawer-open) > .drawer-toggle:checked)) {
+    scrollbar-gutter: auto;
+    overflow: auto;
+}

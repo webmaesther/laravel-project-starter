@@ -45,39 +45,39 @@
                     <button class="btn btn-link btn-sm" v-show="sendEmail" @click="usePassword = true">Use password instead</button>
                 </div>
                 <div class="grid w-full grid-cols-2 justify-around gap-2">
-                    <button class="btn">Login</button>
-                    <button class="btn">Register</button>
+                    <button class="btn btn-secondary">Register</button>
+                    <button class="btn btn-primary">Login</button>
                 </div>
                 <div class="divider">OR</div>
-                <a class="btn btn-block" :href="federated.redirect.url('google')"> Use passkey to login </a>
+                <a class="btn btn-neutral btn-block" :href="federated.redirect.url('google')"> Use passkey to login </a>
                 <div class="divider">OR</div>
                 <p class="text-sm">Confirm your identity using:</p>
                 <div class="mx-12 mt-4 flex flex-row flex-wrap justify-center gap-2">
-                    <a class="btn btn-circle" :href="federated.redirect.url('google')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('google')">
                         <GoogleIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('facebook')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('facebook')">
                         <FacebookIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('linkedin-openid')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('linkedin-openid')">
                         <LinkedInIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('x')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('x')">
                         <XIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('github')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('github')">
                         <GitHubIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('slack')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('slack')">
                         <SlackIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('gitlab')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('gitlab')">
                         <GitLabIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('bitbucket')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('bitbucket')">
                         <BitbucketIcon />
                     </a>
-                    <a class="btn btn-circle" :href="federated.redirect.url('twitch')">
+                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('twitch')">
                         <TwitchIcon />
                     </a>
                 </div>
