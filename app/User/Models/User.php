@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Models;
 
-use App\User\Factories\UserFactory;
+use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail as VerifiesEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,10 +26,10 @@ final class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
-    /** @return HasMany<FederatedAccount, $this> */
-    public function federated_accounts(): HasMany
+    /** @return HasMany<Identity, $this> */
+    public function identities(): HasMany
     {
-        return $this->hasMany(FederatedAccount::class);
+        return $this->hasMany(Identity::class);
     }
 
     /** @return array<string, string> */

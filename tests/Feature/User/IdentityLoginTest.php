@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-use App\User\Factories\FederatedAccountFactory;
-use App\User\Factories\UserFactory;
-use App\User\Http\Controllers\FederatedLoginController;
+use App\User\Http\Controllers\Identity\CallbackController;
+use App\User\Http\Controllers\Identity\RedirectController;
 use App\User\Http\Middleware\RedirectLocalHost;
-use App\User\Models\FederatedAccount;
+use App\User\Models\Identity;
 use App\User\Models\User;
+use Database\Factories\IdentityFactory;
+use Database\Factories\UserFactory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Uri;
 use Laravel\Socialite\Facades\Socialite;
@@ -20,9 +21,10 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\get;
 
 covers([
-    FederatedLoginController::class,
-    FederatedAccount::class,
-    FederatedAccountFactory::class,
+    RedirectController::class,
+    CallbackController::class,
+    Identity::class,
+    IdentityFactory::class,
     RedirectLocalHost::class,
     User::class,
     UserFactory::class,
@@ -36,13 +38,13 @@ describe('Federated Accounts', function (): void {
             ->once()
             ->andReturn(socialite($driver));
 
-        $response = get(route('federated.redirect', $driver));
+        $response = get(route('identities.redirect', $driver));
 
         $response->assertRedirect($driver);
     });
 
     test('creates a user with a federated account', function (string $driver): void {
-        FederatedAccount::factory()->create();
+        Identity::factory()->create();
         $user = new SocialiteUser()->map([
             'id' => fake()->uuid(),
             'name' => fake()->name(),
@@ -53,7 +55,7 @@ describe('Federated Accounts', function (): void {
             ->once()
             ->andReturn(socialite($driver, $user));
 
-        $response = get(route('federated.callback', $driver));
+        $response = get(route('identities.callback', $driver));
 
         $response->assertRedirect(route('dashboard'));
         assertDatabaseCount(User::class, 2);
@@ -61,8 +63,8 @@ describe('Federated Accounts', function (): void {
             'name' => $user->getName(),
             'email' => $email = $user->getEmail(),
         ]);
-        assertDatabaseCount(FederatedAccount::class, 2);
-        assertDatabaseHas(FederatedAccount::class, [
+        assertDatabaseCount(Identity::class, 2);
+        assertDatabaseHas(Identity::class, [
             'driver' => $driver,
             'user_id' => User::query()->where('email', $email)->first()->id,
             'external_id' => $user->getId(),
@@ -71,7 +73,7 @@ describe('Federated Accounts', function (): void {
     });
 
     test('authenticates a user with a federated account', function (string $driver): void {
-        $account = FederatedAccount::factory()->create(['driver' => $driver]);
+        $account = Identity::factory()->create(['driver' => $driver]);
         $user = new SocialiteUser()->map([
             'id' => $account->external_id,
         ]);
@@ -80,11 +82,11 @@ describe('Federated Accounts', function (): void {
             ->once()
             ->andReturn(socialite($driver, $user));
 
-        $response = get(route('federated.callback', $driver));
+        $response = get(route('identities.callback', $driver));
 
         $response->assertRedirect(route('dashboard'));
         assertDatabaseCount(User::class, 1);
-        assertDatabaseCount(FederatedAccount::class, 1);
+        assertDatabaseCount(Identity::class, 1);
         assertAuthenticatedAs($account->user);
     });
 
@@ -101,18 +103,18 @@ describe('Federated Accounts', function (): void {
             ->once()
             ->andReturn(socialite($driver, $user));
 
-        $response = get(route('federated.callback', $driver));
+        $response = get(route('identities.callback', $driver));
 
         $response->assertRedirect(route('dashboard'));
         assertDatabaseCount(User::class, 1);
-        assertDatabaseCount(FederatedAccount::class, 1);
+        assertDatabaseCount(Identity::class, 1);
         assertAuthenticatedAs(User::query()->first());
     });
 
     test('returns 404 for mistyped federated account driver', function (string $driver, string $route): void {
         $driver .= fake()->randomAscii();
 
-        $response = get(route("federated.{$route}", $driver));
+        $response = get(route("identities.{$route}", $driver));
 
         $response->assertNotFound();
 
@@ -123,7 +125,7 @@ describe('Federated Accounts', function (): void {
         $user = User::factory()->create();
 
         $response = actingAs($user)
-            ->get(route("federated.{$route}", $driver));
+            ->get(route("identities.{$route}", $driver));
 
         $response->assertRedirect(route('dashboard'));
 

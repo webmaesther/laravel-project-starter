@@ -2,28 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\User\Http\Controllers;
+namespace App\User\Http\Controllers\Identity;
 
-use App\Http\Controllers\Controller;
-use App\User\Models\FederatedAccount;
+use App\User\Models\Identity;
 use App\User\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirect;
 
-final class FederatedLoginController extends Controller
+final class CallbackController
 {
-    public function redirect(string $driver): SymfonyRedirect
-    {
-        return Socialite::driver($driver)->redirect();
-    }
-
-    public function callback(string $driver): RedirectResponse
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(string $driver): RedirectResponse
     {
         $user = Socialite::driver($driver)->user();
 
-        $account = FederatedAccount::query()
+        $account = Identity::query()
             ->where('driver', $driver)
             ->where('external_id', $user->getId())
             ->first();
@@ -33,7 +30,7 @@ final class FederatedLoginController extends Controller
                 'email' => $user->getEmail(),
             ], [
                 'name' => $user->getName(),
-            ])->federated_accounts()->create([
+            ])->identities()->create([
                 'driver' => $driver,
                 'external_id' => $user->getId(),
             ]);

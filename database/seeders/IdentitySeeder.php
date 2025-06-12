@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-final class FederatedAccountSeeder extends Seeder
+final class IdentitySeeder extends Seeder
 {
     /**
      * Run the database seeds.

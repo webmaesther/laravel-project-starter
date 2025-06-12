@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 use App\User\Enums\SocialiteDriver;
-use App\User\Http\Controllers\FederatedLoginController;
+use App\User\Http\Controllers\Identity\CallbackController;
+use App\User\Http\Controllers\Identity\RedirectController;
 use App\User\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
@@ -13,11 +14,11 @@ Route::get('/auth', fn () => inertia('Auth'))->middleware('guest')->name('auth')
 
 Route::prefix('{driver}')
     ->whereIn('driver', SocialiteDriver::cases())
-    ->name('federated.')
+    ->name('identities.')
     ->middleware('guest')
     ->group(function () {
-        Route::get('redirect', [FederatedLoginController::class, 'redirect'])->name('redirect');
-        Route::get('callback', [FederatedLoginController::class, 'callback'])->middleware(RedirectLocalHost::class)->name('callback');
+        Route::get('redirect', RedirectController::class)->name('redirect');
+        Route::get('callback', CallbackController::class)->middleware(RedirectLocalHost::class)->name('callback');
     });
 
 Route::get('/dashboard', fn () => inertia('Dashboard'))->middleware('auth')->name('dashboard');

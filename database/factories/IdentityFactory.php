@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace App\User\Factories;
+namespace Database\Factories;
 
 use App\User\Enums\SocialiteDriver;
-use App\User\Models\FederatedAccount;
+use App\User\Models\Identity;
 use App\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<FederatedAccount>
+ * @extends Factory<Identity>
  */
-final class FederatedAccountFactory extends Factory
+final class IdentityFactory extends Factory
 {
-    protected $model = FederatedAccount::class;
+    protected $model = Identity::class;
 
     /**
      * Define the model's default state.
      *
-     * @return array<model-property<FederatedAccount>, mixed>
+     * @return array<model-property<Identity>, mixed>
      */
     public function definition(): array
     {

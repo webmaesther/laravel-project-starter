@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import federated from '@/routes/federated';
+    import identities from '@/routes/identities';
     import BitbucketIcon from '@/user/icons/BitbucketIcon.vue';
     import FacebookIcon from '@/user/icons/FacebookIcon.vue';
     import GitHubIcon from '@/user/icons/GitHubIcon.vue';
@@ -49,35 +49,35 @@
                     <button class="btn btn-primary">Login</button>
                 </div>
                 <div class="divider">OR</div>
-                <a class="btn btn-neutral btn-block" :href="federated.redirect.url('google')"> Use passkey to login </a>
+                <a class="btn btn-neutral btn-block" :href="identities.redirect.url('google')"> Use passkey to login </a>
                 <div class="divider">OR</div>
                 <p class="text-sm">Confirm your identity using:</p>
                 <div class="mx-12 mt-4 flex flex-row flex-wrap justify-center gap-2">
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('google')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('google')">
                         <GoogleIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('facebook')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('facebook')">
                         <FacebookIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('linkedin-openid')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('linkedin-openid')">
                         <LinkedInIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('x')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('x')">
                         <XIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('github')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('github')">
                         <GitHubIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('slack')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('slack')">
                         <SlackIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('gitlab')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('gitlab')">
                         <GitLabIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('bitbucket')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('bitbucket')">
                         <BitbucketIcon />
                     </a>
-                    <a class="btn btn-neutral btn-circle" :href="federated.redirect.url('twitch')">
+                    <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('twitch')">
                         <TwitchIcon />
                     </a>
                 </div>

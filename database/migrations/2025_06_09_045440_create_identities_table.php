@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('federated_accounts', function (Blueprint $table): void {
+        Schema::create('identities', function (Blueprint $table): void {
             $table->id();
             $table->enum('driver', array_column(SocialiteDriver::cases(), 'value'));
             $table->string('external_id');
