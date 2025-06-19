@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\User\Enums\SocialiteDriver;
-use App\User\Http\Controllers\Identity\CallbackController;
-use App\User\Http\Controllers\Identity\RedirectController;
-use App\User\Http\Middleware\RedirectLocalHost;
+use App\Enums\SocialiteDriver;
+use App\Http\Controllers\Identity\CallbackController;
+use App\Http\Controllers\Identity\RedirectController;
+use App\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => inertia('Home'))->name('home');

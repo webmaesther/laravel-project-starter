@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\CommandsController;
+use App\Http\Controllers\Api\FactoriesController;
 use App\Http\Middleware\UnlessProduction;
-use App\Playwright\Http\Controllers\Api\CommandsController;
-use App\Playwright\Http\Controllers\Api\FactoriesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

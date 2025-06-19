@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\User\Models\User;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 use Database\Factories\UserFactory;
 use Illuminate\Support\Facades\Hash;

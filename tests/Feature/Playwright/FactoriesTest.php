@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\FactoriesController;
 use App\Http\Middleware\ForceJsonResponse;
 use App\Http\Middleware\UnlessProduction;
-use App\Playwright\Http\Controllers\Api\FactoriesController;
-use App\User\Models\User;
+use App\Models\User;
 use Tests\Feature\Playwright\Dummies\Models\Feature;
 use Tests\Feature\Playwright\Dummies\Models\Fruit;
 use Tests\Feature\Playwright\Dummies\Models\PasswordResetToken;

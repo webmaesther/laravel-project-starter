@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\User\Http\Controllers\Identity;
+namespace App\Http\Controllers\Identity;
 
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirect;

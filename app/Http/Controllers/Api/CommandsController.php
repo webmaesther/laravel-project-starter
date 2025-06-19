@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Playwright\Http\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
 use Closure;
 use Illuminate\Http\JsonResponse;

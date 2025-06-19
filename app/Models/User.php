@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\User\Models;
+namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail as VerifiesEmail;

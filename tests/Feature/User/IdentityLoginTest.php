@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use App\User\Http\Controllers\Identity\CallbackController;
-use App\User\Http\Controllers\Identity\RedirectController;
-use App\User\Http\Middleware\RedirectLocalHost;
-use App\User\Models\Identity;
-use App\User\Models\User;
+use App\Http\Controllers\Identity\CallbackController;
+use App\Http\Controllers\Identity\RedirectController;
+use App\Http\Middleware\RedirectLocalHost;
+use App\Models\Identity;
+use App\Models\User;
 use Database\Factories\IdentityFactory;
 use Database\Factories\UserFactory;
 use Illuminate\Http\RedirectResponse;

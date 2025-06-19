@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Http\Controllers\Identity;
+namespace App\Http\Controllers\Identity;
 
-use App\User\Models\Identity;
-use App\User\Models\User;
+use App\Models\Identity;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
