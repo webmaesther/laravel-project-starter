@@ -18,6 +18,9 @@
             "linkedin",
             "openid"
         ],
-        "paths": []
+        "paths": [
+            "./public/fonts/filament",
+            "./public/js/filament/"
+        ]
     }
 }
