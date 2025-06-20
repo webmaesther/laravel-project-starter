@@ -60,7 +60,7 @@ final class AppServiceProvider extends ServiceProvider
     public function configureTestingEnvironment(): void
     {
         Sleep::fake();
-        // Http::preventStrayRequests();
+        Http::preventStrayRequests();
     }
 
     public function configureVite(): void

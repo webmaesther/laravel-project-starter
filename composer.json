@@ -24,7 +24,6 @@
         "laravel/sanctum": "^4.1",
         "laravel/scout": "^10.15",
         "laravel/socialite": "^5.21",
-        "laravel/telescope": "^5.9",
         "laravel/tinker": "^2.10.1",
         "laravel/wayfinder": "^0.1.6",
         "typesense/typesense-php": "^5.1"
@@ -45,6 +44,7 @@
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.22",
         "laravel/sail": "^1.43",
+        "laravel/telescope": "^5.9",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.8",
         "peckphp/peck": "^0.1.3",
@@ -110,7 +110,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": ["laravel/telescope"]
         }
     },
     "config": {

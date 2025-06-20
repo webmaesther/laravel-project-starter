@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
-use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
 use Override;
@@ -20,35 +19,22 @@ final class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     #[Override]
     public function register(): void
     {
-        // Telescope::night();
+        if (! $this->app->isLocal()) {
+            return;
+        }
 
-        $this->hideSensitiveRequestDetails();
+        $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
 
-        $isLocal = $this->app->environment('local');
+        Telescope::night();
+    }
 
-        Telescope::filter(function (IncomingEntry $entry) use ($isLocal): bool {
-            if ($isLocal) {
-                return true;
-            }
+    public function boot(): void
+    {
+        if (! $this->app->isLocal()) {
+            return;
+        }
 
-            if ($entry->isReportableException()) {
-                return true;
-            }
-
-            if ($entry->isFailedRequest()) {
-                return true;
-            }
-
-            if ($entry->isFailedJob()) {
-                return true;
-            }
-
-            if ($entry->isScheduledTask()) {
-                return true;
-            }
-
-            return $entry->hasMonitoredTag();
-        });
+        parent::boot();
     }
 
     /**
@@ -60,24 +46,6 @@ final class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     protected function gate(): void
     {
         Gate::define('viewTelescope', fn ($user): false => false);
-    }
-
-    /**
-     * Prevent sensitive request details from being logged by Telescope.
-     */
-    private function hideSensitiveRequestDetails(): void
-    {
-        if ($this->app->environment('local')) {
-            return;
-        }
-
-        Telescope::hideRequestParameters(['_token']);
-
-        Telescope::hideRequestHeaders([
-            'cookie',
-            'x-csrf-token',
-            'x-xsrf-token',
-        ]);
     }
 }
 
