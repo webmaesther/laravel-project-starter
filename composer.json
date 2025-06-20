@@ -12,6 +12,7 @@
         "ext-swoole": "*",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/cashier": "^15.7",
+        "laravel/folio": "^1.1",
         "laravel/fortify": "^1.27",
         "laravel/framework": "^12.19",
         "laravel/horizon": "^5.33",
