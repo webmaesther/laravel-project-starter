@@ -13,8 +13,6 @@ use InvalidArgumentException;
  */
 final class UserFactory extends Factory
 {
-    public const string DEFAULT_PASSWORD = 'password';
-
     protected $model = User::class;
 
     /**
@@ -37,14 +35,14 @@ final class UserFactory extends Factory
                     ->append(fake()->freeEmailDomain())
                     ->toString();
             },
-            'password' => self::DEFAULT_PASSWORD,
+            'password' => User::DEFAULT_PASSWORD,
         ];
     }
 
     public function admin(): self
     {
         return $this->state([
-            'email' => 'eszter.czotter@gmail.com',
+            'email' => User::ADMIN_EMAIL,
         ]);
     }
 

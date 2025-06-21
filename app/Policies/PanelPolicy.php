@@ -14,6 +14,6 @@ final class PanelPolicy
      */
     public function access(User $user): bool
     {
-        return $user->email === 'eszter.czotter@gmail.com';
+        return $user->isAdmin();
     }
 }

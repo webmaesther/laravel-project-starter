@@ -20,8 +20,8 @@ final class CreateUser extends CreateRecord
         $data = User::factory()->make()->toArray();
         $this->form->fill([
             ...$data,
-            'password' => User::factory()::DEFAULT_PASSWORD,
-            'password_confirmation' => User::factory()::DEFAULT_PASSWORD,
+            'password' => User::DEFAULT_PASSWORD,
+            'password_confirmation' => User::DEFAULT_PASSWORD,
         ]);
     }
 

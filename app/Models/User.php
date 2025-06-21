@@ -24,6 +24,10 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
     use TwoFactorAuthenticatable;
     use VerifiesEmail;
 
+    public const string ADMIN_EMAIL = 'eszter.czotter@gmail.com';
+
+    public const string DEFAULT_PASSWORD = 'password';
+
     protected static string $factory = UserFactory::class;
 
     /** @var list<model-property<User>> */
@@ -41,6 +45,11 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->can('access', $panel);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->email === self::ADMIN_EMAIL;
     }
 
     /** @return array<string, string> */
