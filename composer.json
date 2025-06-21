@@ -55,6 +55,7 @@
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-laravel": "^3.2",
         "pestphp/pest-plugin-livewire": "^3.0",
+        "pestphp/pest-plugin-type-coverage": "^3.5",
         "pestphp/pest-plugin-watch": "^3.0",
         "rector/rector": "^2.0",
         "soloterm/solo": "^0.5.0"
@@ -110,8 +111,9 @@
             "rector --dry-run",
             "pint --test",
             "phpstan",
-            "pest --parallel --coverage --min=100",
-            "pest --mutate --covered-only --parallel --min=100"
+            "@pest:types",
+            "@pest:coverage",
+            "@pest:mutate"
         ],
         "pest:fast": [
             "pest --parallel"
@@ -121,6 +123,9 @@
         ],
         "pest:mutate": [
             "pest --mutate --covered-only --parallel --min=100"
+        ],
+        "pest:types": [
+            "pest --type-coverage --min=100"
         ]
     },
     "extra": {

@@ -32,13 +32,13 @@ final class UsersTable
                 ToggleColumn::make('has_verified_email')
                     ->label('Verified email')
                     ->state(fn (User $user) => $user->hasVerifiedEmail())
-                    ->updateStateUsing(function ($state, User $user): void {
+                    ->updateStateUsing(function (bool $state, User $user): void {
                         if ($state) {
                             $user->markEmailAsVerified();
                         } else {
                             $user->update(['email_verified_at' => null]);
                         }
-                    })->afterStateUpdated(function ($state, User $user): void {
+                    })->afterStateUpdated(function (bool $state, User $user): void {
                         Notification::make()
                             ->title(function () use ($state, $user): string {
                                 $verdict = $state ? '<u>verified</u>' : '<u>unverified</u>';
