@@ -13,4 +13,11 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
         $this->withoutVite();
     }
+
+    final public function asGuest(?string $guard = null): self
+    {
+        $this->app['auth']->guard($guard)->forgetUser();
+
+        return $this;
+    }
 }

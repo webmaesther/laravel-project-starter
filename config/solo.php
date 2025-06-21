@@ -47,8 +47,8 @@ return [
     */
     'commands' => [
         // Environment...
-        'HTTP' => Command::from('php artisan octane:start --watch'),
-        'SSR' => Command::from('php artisan inertia:start-ssr'),
+        'HTTP' => Command::from('php artisan serve'),
+        'SSR' => Command::from('php artisan inertia:start-ssr')->lazy(),
         'Tinker' => Command::from('php artisan tinker')->interactive(),
         'Sail' => Command::from('vendor/bin/sail up')->interactive(),
         'Pail' => Command::from('php artisan pail -vv'),
@@ -72,7 +72,7 @@ return [
         'Prettier' => Command::from('npm run format')->lazy(),
 
         // Frontend
-        'Dev' => Command::from('npm run dev')->lazy(),
+        'Dev' => Command::from('npm run dev'),
         'Build' => Command::from('npm run build:ssr')->lazy(),
     ],
 

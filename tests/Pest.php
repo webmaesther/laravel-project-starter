@@ -13,8 +13,10 @@ declare(strict_types=1);
 |
 */
 
-pest()->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+use Tests\TestCase;
+
+pest()->extend(TestCase::class)
+    ->use(Illuminate\Foundation\Testing\DatabaseTransactions::class)
     ->in('Feature');
 
 /*
@@ -41,7 +43,7 @@ expect()->extend('toBeOne', fn () => $this->toBe(1));
 |
 */
 
-function something(): void
+function asGuest(?string $guard = null): TestCase
 {
-    // ..
+    return test()->asGuest($guard);
 }

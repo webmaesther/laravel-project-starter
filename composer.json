@@ -54,6 +54,7 @@
         "peckphp/peck": "^0.1.3",
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-laravel": "^3.2",
+        "pestphp/pest-plugin-livewire": "^3.0",
         "pestphp/pest-plugin-watch": "^3.0",
         "rector/rector": "^2.0",
         "soloterm/solo": "^0.5.0"
@@ -110,6 +111,15 @@
             "pint --test",
             "phpstan",
             "pest --parallel --coverage --min=100",
+            "pest --mutate --covered-only --parallel --min=100"
+        ],
+        "pest:fast": [
+            "pest --parallel"
+        ],
+        "pest:coverage": [
+            "pest --parallel --coverage --min=100"
+        ],
+        "pest:mutate": [
             "pest --mutate --covered-only --parallel --min=100"
         ]
     },

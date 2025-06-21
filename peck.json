@@ -16,11 +16,13 @@
             "cors",
             "nginx",
             "linkedin",
-            "openid"
+            "openid",
+            "infolist",
+            "autofill"
         ],
         "paths": [
-            "./public/fonts/filament",
-            "./public/js/filament/"
+            ".\/public\/fonts\/filament",
+            ".\/public\/js\/filament\/"
         ]
     }
 }
