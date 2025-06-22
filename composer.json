@@ -36,7 +36,6 @@
         "ext-mbstring": "*",
         "ext-pcntl": "*",
         "ext-posix": "*",
-        "ext-xdebug": "*",
         "ext-zip": "*",
         "lib-pcre": ">=7.0",
         "barryvdh/laravel-debugbar": "^3.15",
