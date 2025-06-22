@@ -10,14 +10,9 @@
     import TwitchIcon from '@/user/icons/TwitchIcon.vue';
     import XIcon from '@/user/icons/XIcon.vue';
     import { Head } from '@inertiajs/vue3';
-    import { whenever } from '@vueuse/core';
     import { ref } from 'vue';
 
-    const usePassword = ref(true);
-    const sendEmail = ref(false);
-
-    whenever(usePassword, () => (sendEmail.value = false));
-    whenever(sendEmail, () => (usePassword.value = false));
+    const usePassword = ref(false);
 
     const rememberMe = ref(true);
 </script>
@@ -41,16 +36,16 @@
                         <input type="checkbox" v-model="rememberMe" class="checkbox checkbox-xs" />
                         Remember me
                     </label>
-                    <button class="btn btn-link btn-sm" v-show="usePassword" @click="sendEmail = true">Send magic link instead</button>
-                    <button class="btn btn-link btn-sm" v-show="sendEmail" @click="usePassword = true">Use password instead</button>
+                    <button class="btn btn-link btn-sm" v-if="usePassword" @click="usePassword = false">Show passwordless options</button>
+                    <button class="btn btn-link btn-sm" v-else @click="usePassword = true">Use traditional password</button>
                 </div>
-                <div class="w-full">
-                    <button class="btn btn-primary btn-block col-start-2">Log in</button>
+                <div class="grid w-full grid-cols-2 gap-2">
+                    <button class="btn btn-primary btn-block col-span-2" v-if="usePassword">Check password</button>
+                    <template v-else>
+                        <button class="btn btn-secondary btn-block">Send magic link</button>
+                        <button class="btn btn-primary btn-block">Use passkey</button>
+                    </template>
                 </div>
-                <div class="divider">OR</div>
-                <a class="btn btn-neutral btn-block" :href="identities.redirect.url('google')">Use passkey</a>
-                <div class="divider">OR</div>
-                <p class="text-sm">Confirm your identity using:</p>
                 <div class="mx-12 mt-4 flex flex-row flex-wrap justify-center gap-2">
                     <a class="btn btn-neutral btn-circle" :href="identities.redirect.url('google')">
                         <GoogleIcon />
@@ -80,6 +75,7 @@
                         <TwitchIcon />
                     </a>
                 </div>
+                <a href="#" class="btn btn-link">Not a member yet?</a>
             </div>
         </div>
     </div>
