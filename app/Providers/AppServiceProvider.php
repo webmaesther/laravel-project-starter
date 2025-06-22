@@ -38,6 +38,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->configureVite();
         $this->configureCarbon();
         $this->configurePasswords();
+        $this->configureHttps();
 
         if ($this->app->runningUnitTests()) {
             $this->configureTestingEnvironment();
@@ -48,7 +49,7 @@ final class AppServiceProvider extends ServiceProvider
         }
     }
 
-    public function configureEloquent(): void
+    private function configureEloquent(): void
     {
         Model::unguard();
         Model::preventLazyLoading();
@@ -57,29 +58,33 @@ final class AppServiceProvider extends ServiceProvider
         Model::automaticallyEagerLoadRelationships();
     }
 
-    public function configureTestingEnvironment(): void
+    private function configureTestingEnvironment(): void
     {
         Sleep::fake();
         Http::preventStrayRequests();
     }
 
-    public function configureVite(): void
+    private function configureVite(): void
     {
         Vite::useAggressivePrefetching();
     }
 
-    public function configureCarbon(): void
+    private function configureCarbon(): void
     {
         Date::use(CarbonImmutable::class);
     }
 
-    public function configureProductionEnvironment(): void
+    private function configureHttps(): void
     {
         URL::forceHttps();
+    }
+
+    private function configureProductionEnvironment(): void
+    {
         DB::prohibitDestructiveCommands();
     }
 
-    public function configurePasswords(): void
+    private function configurePasswords(): void
     {
         Password::defaults(function (): ?Password {
             if (! $this->app->isProduction()) {

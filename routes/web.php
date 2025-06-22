@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => inertia('Home'))->name('home');
 
-Route::get('/login', fn () => inertia('Login'))->middleware('guest')->name('login');
-Route::get('/register', fn () => inertia('Register'))->middleware('guest')->name('register');
-
 Route::prefix('{driver}')
     ->whereIn('driver', SocialiteDriver::cases())
     ->name('identities.')

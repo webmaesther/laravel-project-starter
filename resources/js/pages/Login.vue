@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import identities from '@/routes/identities';
+    import { store } from '@/routes/login';
     import BitbucketIcon from '@/user/icons/BitbucketIcon.vue';
     import FacebookIcon from '@/user/icons/FacebookIcon.vue';
     import GitHubIcon from '@/user/icons/GitHubIcon.vue';
@@ -9,12 +10,25 @@
     import SlackIcon from '@/user/icons/SlackIcon.vue';
     import TwitchIcon from '@/user/icons/TwitchIcon.vue';
     import XIcon from '@/user/icons/XIcon.vue';
-    import { Head } from '@inertiajs/vue3';
-    import { ref } from 'vue';
+    import { Head, useForm } from '@inertiajs/vue3';
+    import { ref, watch } from 'vue';
+
+    const form = useForm({
+        email: '',
+        password: '',
+        remember: true,
+    });
+
+    const checkPassword = () => {
+        form.submit(store());
+    };
 
     const usePassword = ref(false);
 
-    const rememberMe = ref(true);
+    watch(usePassword, () => {
+        form.reset();
+        form.clearErrors();
+    });
 </script>
 
 <template>
@@ -23,24 +37,33 @@
         <div class="card card-border bg-base-100 m-6 w-96 drop-shadow-xl">
             <div class="card-body flex items-center">
                 <h1 class="card-title text-3xl">Login</h1>
-                <label class="input mt-6 w-full">
+                <label
+                    class="input mt-6 w-full"
+                    :class="{ 'input-error tooltip tooltip-open tooltip-right tooltip-error': form.errors.email }"
+                    :data-tip="form.errors.email"
+                >
                     <span>Email</span>
-                    <input type="email" class="grow text-right placeholder:text-right" placeholder="john.doe@example.com" />
+                    <input v-model="form.email" type="text" class="grow text-right placeholder:text-right" placeholder="john.doe@example.com" />
                 </label>
-                <label class="input w-full" v-show="usePassword">
+                <label
+                    class="input w-full"
+                    v-if="usePassword"
+                    :class="{ 'input-error tooltip tooltip-open tooltip-right tooltip-error': form.errors.password }"
+                    :data-tip="form.errors.password"
+                >
                     <span>Password</span>
-                    <input type="password" class="grow text-right placeholder:text-right" placeholder="************" />
+                    <input v-model="form.password" type="password" class="grow text-right placeholder:text-right" placeholder="************" />
                 </label>
                 <div class="flex w-full justify-between">
                     <label class="label text-xs">
-                        <input type="checkbox" v-model="rememberMe" class="checkbox checkbox-xs" />
+                        <input type="checkbox" v-model="form.remember" class="checkbox checkbox-xs" />
                         Remember me
                     </label>
                     <button class="btn btn-link btn-sm" v-if="usePassword" @click="usePassword = false">Show passwordless options</button>
                     <button class="btn btn-link btn-sm" v-else @click="usePassword = true">Use traditional password</button>
                 </div>
                 <div class="grid w-full grid-cols-2 gap-2">
-                    <button class="btn btn-primary btn-block col-span-2" v-if="usePassword">Check password</button>
+                    <button @click="checkPassword" class="btn btn-primary btn-block col-span-2" v-if="usePassword">Check password</button>
                     <template v-else>
                         <button class="btn btn-secondary btn-block">Send magic link</button>
                         <button class="btn btn-primary btn-block">Use passkey</button>
