@@ -8,4 +8,5 @@ else
   # Uncommitted changes
   composer test
   npm run check
+  exec < /dev/tty && node_modules/.bin/cz --hook || trueg
 fi
