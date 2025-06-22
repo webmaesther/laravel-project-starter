@@ -29,6 +29,7 @@ final class CreateUser extends CreateRecord
     {
         return [
             Action::make('autofill')
+                ->visible(! app()->isProduction())
                 ->icon(Heroicon::OutlinedBolt)
                 ->action('autofill'),
             ...parent::getFormActions(),
