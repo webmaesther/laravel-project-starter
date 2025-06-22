@@ -1,0 +1,58 @@
+name: JS Tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+  workflow_call:
+
+permissions:
+  contents: write
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+
+      - name: Get Composer Cache Directory
+        id: composer_cache_directory
+        run: echo dir=$(composer config cache-files-dir) >> $GITHUB_OUTPUT
+
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v4
+        with:
+          key: composer-cache-${{ hashFiles('./composer.lock') }}
+          path: ${{ steps.composer_cache_directory.outputs.dir }}
+          restore-keys: composer-cache-
+
+      - name: Install Composer Dependencies
+        run: composer test:deps
+
+      - name: Generate Routes
+        env:
+          CACHE_STORE: ${{ vars.CACHE_STORE }}
+          DB_CONNECTION: ${{ vars.DB_CONNECTION }}
+          DB_DATABASE: ${{ vars.DB_DATABASE }}
+        run: composer wayfinder:gen
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Test JS
+        run: npm run test

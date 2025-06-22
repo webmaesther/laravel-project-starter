@@ -103,17 +103,23 @@
             "Composer\\Config::disableProcessTimeout",
             "@php artisan solo"
         ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "peck",
-            "rector --dry-run",
-            "pint --test",
-            "phpstan",
-            "@pest:types",
-            "@pest:coverage",
-            "@pest:mutate"
+        "test:deps": [
+            "@composer install --ansi --no-interaction --prefer-dist --optimize-autoloader",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('database/testing.sqlite') || touch('database/testing.sqlite');\""
         ],
-        "pest:fast": [
+        "test:prep": [
+            "@php artisan key:generate --ansi",
+            "@php artisan migrate --ansi",
+            "@php artisan optimize:clear --ansi"
+        ],
+        "test": [
+            "@peck:check",
+            "@lint:check",
+            "@phpstan:check",
+            "@pest:check"
+        ],
+        "pest:quick": [
             "pest --parallel"
         ],
         "pest:coverage": [
@@ -124,6 +130,40 @@
         ],
         "pest:types": [
             "pest --type-coverage --min=100"
+        ],
+        "pest:check": [
+            "@pest:types",
+            "@pest:coverage",
+            "@pest:mutate"
+        ],
+        "rector:check": [
+            "rector --dry-run"
+        ],
+        "pint:check": [
+            "pint --test"
+        ],
+        "rector:format": [
+            "rector"
+        ],
+        "pint:format": [
+            "pint"
+        ],
+        "lint:check": [
+            "@rector:check",
+            "@pint:check"
+        ],
+        "lint:format": [
+            "@rector:format",
+            "@pint:format"
+        ],
+        "phpstan:check": [
+            "phpstan"
+        ],
+        "peck:check": [
+            "peck"
+        ],
+        "wayfinder:gen": [
+            "@php artisan wayfinder:generate"
         ]
     },
     "extra": {

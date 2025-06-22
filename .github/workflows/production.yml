@@ -1,0 +1,25 @@
+name: Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  js:
+    uses: ./.github/workflows/js.yml
+
+  php:
+    uses: ./.github/workflows/php.yml
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [js, php]
+    steps:
+      - name: Trigger Deploy
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.WEBHOOK_PRODUCTION }}

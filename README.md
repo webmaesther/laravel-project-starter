@@ -1,17 +1,15 @@
-# Installation
+# Laravel Project Starter
+
+[![Production](https://github.com/webmaesther/laravel-project-starter/actions/workflows/production.yml/badge.svg)](https://github.com/webmaesther/laravel-project-starter/actions/workflows/production.yml)
+[![Staging](https://github.com/webmaesther/laravel-project-starter/actions/workflows/staging.yml/badge.svg)](https://github.com/webmaesther/laravel-project-starter/actions/workflows/staging.yml)
+
 
 ## Requirements
 
 - [PHP](https://phpmon.app/) > 8.4
   - Extensions
-    - swoole
-    - xdebug
-    - redis
-    - pcntl
-    - posix
-    - mbstring
-    - json
-    - zip
+    - pcov
+    - plus the ones in composer.json
   - Libraries
     - curl
 - [curl](https://everything.curl.dev/install/macos.html) > 8.6
@@ -20,7 +18,7 @@
 - [Docker](https://www.docker.com/) > 4.41
 - [screen](https://formulae.brew.sh/formula/screen) > v5
 
-## Setup
+## Installation
 
 ```shell
 composer create-project webmaesther/laravel-project-starter -s dev
