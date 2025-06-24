@@ -167,36 +167,6 @@ describe('User Creating', function (): void {
                         && $field->getHintColor() === 'danger'
                         && $field->getHintIcon() === Heroicon::ExclamationTriangle
                         && $field->getHintIconTooltip() === 'Change only if you know what you are doing!'
-                )
-                ->assertSchemaComponentExists('billing', checkComponentUsing: fn (Tab $t): true => true)
-                ->assertSchemaComponentExists('billing.stripe', checkComponentUsing: fn (Fieldset $f): true => true)
-                ->assertFormFieldExists(
-                    key: 'billing.stripe.id',
-                    checkFieldUsing: fn (TextInput $field): bool => $field->getLabel() === 'ID'
-                        && $field->getHint() === 'Danger zone!'
-                        && $field->getHintColor() === 'danger'
-                        && $field->getHintIcon() === Heroicon::ExclamationTriangle
-                        && $field->getHintIconTooltip() === 'Change only if you know what you are doing!'
-                )->assertFormFieldExists(
-                    key: 'billing.stripe.trial-ends-at',
-                    checkFieldUsing: fn (DateTimePicker $field): bool => $field->getLabel() === 'Trial until'
-                        && $field->getPrefixIcon() === Heroicon::Calendar
-                        && $field->getDatalistOptions() === [
-                            now()->toString(),
-                            now()->addDays(7)->toString(),
-                            now()->addDays(14)->toString(),
-                            now()->addDays(30)->toString(),
-                        ]
-                )->assertSchemaComponentExists('billing.payment-method', checkComponentUsing: fn (Fieldset $f): true => true)
-                ->assertFormFieldExists(
-                    key: 'billing.payment-method.type',
-                    checkFieldUsing: fn (TextInput $field): bool => $field->getLabel() === 'Default'
-                        && $field->isReadOnly()
-                )
-                ->assertFormFieldExists(
-                    key: 'billing.payment-method.last-four',
-                    checkFieldUsing: fn (TextInput $field): bool => $field->getLabel() === 'Last used (up to 4)'
-                        && $field->isReadOnly()
                 );
         });
     });

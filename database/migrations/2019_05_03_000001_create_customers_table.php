@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_items', function (Blueprint $table): void {
+        Schema::create('customers', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('subscription_id');
-            $table->string('stripe_id')->unique();
-            $table->string('stripe_product');
-            $table->string('stripe_price');
-            $table->integer('quantity')->nullable();
+            $table->morphs('billable');
+            $table->string('paddle_id')->unique();
+            $table->string('name');
+            $table->string('email');
+            $table->timestamp('trial_ends_at')->nullable();
             $table->timestamps();
-
-            $table->index(['subscription_id', 'stripe_price']);
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscription_items');
+        Schema::dropIfExists('customers');
     }
 };

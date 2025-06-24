@@ -110,43 +110,6 @@ final class UserForm
                                             ->hintIconTooltip('Change only if you know what you are doing!'),
                                     ]),
                             ]),
-                        Tabs\Tab::make('Billing')
-                            ->key('billing')
-                            ->schema([
-                                Fieldset::make('Stripe')
-                                    ->key('stripe')
-                                    ->schema([
-                                        TextInput::make('stripe_id')
-                                            ->key('id')
-                                            ->label('ID')
-                                            ->hint('Danger zone!')
-                                            ->hintColor('danger')
-                                            ->hintIcon(Heroicon::ExclamationTriangle)
-                                            ->hintIconTooltip('Change only if you know what you are doing!'),
-                                        DateTimePicker::make('trial_ends_at')
-                                            ->key('trial-ends-at')
-                                            ->label('Trial until')
-                                            ->prefixIcon(Heroicon::Calendar)
-                                            ->datalist([
-                                                now()->toString(),
-                                                now()->addDays(7)->toString(),
-                                                now()->addDays(14)->toString(),
-                                                now()->addDays(30)->toString(),
-                                            ]),
-                                    ]),
-                                Fieldset::make('Payment Method')
-                                    ->key('payment-method')
-                                    ->schema([
-                                        TextInput::make('pm_type')
-                                            ->key('type')
-                                            ->label('Default')
-                                            ->readOnly(),
-                                        TextInput::make('pm_last_four')
-                                            ->key('last-four')
-                                            ->label('Last used (up to 4)')
-                                            ->readOnly(),
-                                    ]),
-                            ]),
                     ]),
             ]);
     }

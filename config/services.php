@@ -87,4 +87,8 @@ return [
         'client_secret' => env('TWITCH_CLIENT_SECRET'),
         'redirect' => env('TWITCH_REDIRECT'),
     ],
+
+    'paddle' => [
+        'webhook_secret' => base64_decode((string) env('PADDLE_WEBHOOK_SECRET')),
+    ],
 ];

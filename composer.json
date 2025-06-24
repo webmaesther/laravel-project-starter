@@ -14,7 +14,7 @@
         "ext-redis": "*",
         "filament/filament": "^4.0",
         "inertiajs/inertia-laravel": "^2.0",
-        "laravel/cashier": "^15.7",
+        "laravel/cashier-paddle": "^2.6",
         "laravel/folio": "^1.1",
         "laravel/fortify": "^1.27",
         "laravel/framework": "^12.19",

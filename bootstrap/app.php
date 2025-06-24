@@ -23,6 +23,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware
             ->statefulApi()
+            ->validateCsrfTokens(except: [
+                'paddle/*',
+            ])
             ->api(prepend: [
                 ForceJsonResponse::class,
             ])

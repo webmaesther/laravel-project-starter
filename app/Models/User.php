@@ -14,12 +14,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Paddle\Billable;
 
 final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
+    use Billable;
+
     /** @use HasFactory<UserFactory> */
     use HasFactory;
-
     use Notifiable;
     use TwoFactorAuthenticatable;
     use VerifiesEmail;
