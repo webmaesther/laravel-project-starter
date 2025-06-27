@@ -6,6 +6,7 @@
 .env.dusk.local
 .phpactor.json
 .phpunit.result.cache
+.pint.cache.json
 /.fleet
 /.idea
 /.nova

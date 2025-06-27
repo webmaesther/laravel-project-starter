@@ -22,6 +22,7 @@ final class User extends Authenticatable implements FilamentUser, MustVerifyEmai
 
     /** @use HasFactory<UserFactory> */
     use HasFactory;
+
     use Notifiable;
     use TwoFactorAuthenticatable;
     use VerifiesEmail;
