@@ -19,7 +19,7 @@
         "laravel/fortify": "^1.27",
         "laravel/framework": "^12.19",
         "laravel/horizon": "^5.33",
-        "laravel/nightwatch": "^1.7",
+        "laravel/nightwatch": "^1.9",
         "laravel/octane": "^2.10",
         "laravel/pennant": "^1.17",
         "laravel/pulse": "^1.4",
