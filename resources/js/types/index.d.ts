@@ -1,3 +1,5 @@
+import { InitializePaddleOptions } from '@paddle/paddle-js';
+
 export interface Auth {
     user: User;
 }
@@ -14,4 +16,5 @@ export interface User {
 export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     name: string;
     auth: Auth;
+    paddle?: InitializePaddleOptions;
 };

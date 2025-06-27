@@ -12,7 +12,6 @@
 
         @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
         @inertiaHead
-        @paddleJS
     </head>
     <body>
         @inertia
