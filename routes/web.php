@@ -5,10 +5,13 @@ declare(strict_types=1);
 use App\Enums\SocialiteDriver;
 use App\Http\Controllers\Identity\CallbackController;
 use App\Http\Controllers\Identity\RedirectController;
+use App\Http\Middleware\InitializePaddle;
 use App\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => inertia('Home'))->name('home');
+Route::get('/', fn () => inertia('Home', [
+    'plans' => config('subscription.plans'),
+]))->middleware(InitializePaddle::class)->name('home');
 
 Route::prefix('{driver}')
     ->whereIn('driver', SocialiteDriver::cases())

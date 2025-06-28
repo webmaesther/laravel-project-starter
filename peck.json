@@ -22,7 +22,8 @@
         ],
         "paths": [
             ".\/public\/fonts\/filament",
-            ".\/public\/js\/filament\/"
+            ".\/public\/js\/filament\/",
+            ".\/resources\/unsplash\/"
         ]
     }
 }
