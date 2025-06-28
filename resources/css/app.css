@@ -11,3 +11,8 @@
     scrollbar-gutter: auto;
     overflow: auto;
 }
+
+:root {
+    --bg-image-dark: url('../images/background-dark.webp');
+    --bg-image-light: url('../images/background-light.webp');
+}

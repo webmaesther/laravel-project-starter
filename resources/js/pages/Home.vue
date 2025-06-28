@@ -1,7 +1,22 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import SubscriptionPlan from '@/components/SubscriptionPlan.vue';
+
+    defineProps<{
+        plans: {
+            id: string;
+            label: string;
+            prices: {
+                id: string;
+                label: string;
+            }[];
+            features: string[];
+            button: string;
+        }[];
+    }>();
+</script>
 
 <template>
-    <div class="hero background min-h-screen">
+    <div class="hero min-h-screen bg-(image:--bg-image-light) dark:bg-(image:--bg-image-dark)">
         <div class="hero-overlay overlay"></div>
         <div class="hero-content text-neutral-content text-center">
             <div class="max-w-md">
@@ -11,11 +26,9 @@
             </div>
         </div>
     </div>
+    <div class="hero bg-base-200 min-h-screen">
+        <div class="hero-content text-center">
+            <SubscriptionPlan v-for="plan in plans" :key="plan.id" :plan />
+        </div>
+    </div>
 </template>
-
-<style scoped>
-    .background {
-        background-image: url('../../images/background.webp');
-        background-color: black;
-    }
-</style>
