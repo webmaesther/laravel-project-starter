@@ -10,7 +10,7 @@ use App\Http\Middleware\InitializePaddle;
 use App\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => inertia('Home', [
+Route::get('/', fn () => inertia('Landing', [
     'plans' => config('subscription.plans'),
 ]))->middleware(InitializePaddle::class)->name('home');
 
