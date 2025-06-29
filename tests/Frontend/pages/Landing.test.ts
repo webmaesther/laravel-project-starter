@@ -1,11 +1,11 @@
-import Welcome from '@/pages/Home.vue';
+import Landing from '@/pages/Landing.vue';
 import { render, screen } from '@testing-library/vue';
 import { describe } from 'node:test';
 import { expect, test } from 'vitest';
 
-describe('<Welcome />', () => {
+describe('<Landing />', () => {
     test('renders Laravel on the page', async () => {
-        render(Welcome);
+        render(Landing);
 
         expect(screen.queryByText('Laravel', { exact: false })).not.toBeNull();
     });
