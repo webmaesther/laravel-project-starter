@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\LoginLinkController;
 use App\Models\User;
 use App\Notifications\MagicLink;
 use Illuminate\Http\Request;
@@ -14,7 +15,10 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\travel;
 
-covers(MagicLink::class);
+covers([
+    MagicLink::class,
+    LoginLinkController::class,
+]);
 
 describe('Login', function (): void {
     test('users can log in with their email and password', function (): void {
