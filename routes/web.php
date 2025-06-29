@@ -7,6 +7,8 @@ use App\Http\Controllers\Identity\CallbackController;
 use App\Http\Controllers\Identity\RedirectController;
 use App\Http\Middleware\InitializePaddle;
 use App\Http\Middleware\RedirectLocalHost;
+use App\Notifications\MagicLink;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => inertia('Home', [
@@ -23,3 +25,21 @@ Route::prefix('{driver}')
     });
 
 Route::get('/dashboard', fn () => inertia('Dashboard'))->middleware('auth')->name('dashboard');
+
+Route::post('/login/link', function (Request $request) {
+    $user = App\Models\User::query()
+        ->where('email', $request->string('email'))
+        ->firstOrFail();
+
+    $user->notify(new MagicLink($user));
+
+    return redirect()->back()->with([
+        'toast' => 'Magic link sent. Please check your email.',
+    ]);
+})->name('login.link.store');
+
+Route::get('/login/link/{user}', function (App\Models\User $user) {
+    Illuminate\Support\Facades\Auth::login($user);
+
+    return to_route('dashboard');
+})->middleware('signed')->name('login.link.show');

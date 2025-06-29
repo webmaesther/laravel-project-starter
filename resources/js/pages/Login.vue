@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import identities from '@/routes/identities';
-    import { store } from '@/routes/login';
+    import * as login from '@/routes/login';
+    import * as link from '@/routes/login/link';
     import BitbucketIcon from '@/user/icons/BitbucketIcon.vue';
     import FacebookIcon from '@/user/icons/FacebookIcon.vue';
     import GitHubIcon from '@/user/icons/GitHubIcon.vue';
@@ -13,17 +14,39 @@
     import { Head, useForm } from '@inertiajs/vue3';
     import { ref, watch } from 'vue';
 
-    const form = useForm({
+    const form = useForm<{
+        email: string;
+        password: string;
+        remember: boolean;
+        action: 'link' | 'password' | null;
+    }>({
         email: '',
         password: '',
         remember: true,
+        action: null,
     });
 
     const checkPassword = () => {
-        form.submit(store());
+        form.submit(login.store());
+    };
+
+    const sendMagicLink = () => {
+        form.submit(link.store());
     };
 
     const usePassword = ref(false);
+
+    const submit = () => {
+        switch (form.action) {
+            case 'link':
+                sendMagicLink();
+                break;
+            case 'password':
+                checkPassword();
+                break;
+            default:
+        }
+    };
 
     watch(usePassword, () => {
         form.reset();
@@ -35,7 +58,7 @@
     <div class="bg-base-300 flex h-screen w-screen items-center justify-center">
         <Head title="Log in"></Head>
         <div class="card card-border bg-base-100 m-6 w-96 drop-shadow-xl">
-            <div class="card-body flex items-center">
+            <form class="card-body flex items-center" @submit.prevent="submit">
                 <h1 class="card-title text-3xl">Login</h1>
                 <label
                     class="input mt-6 w-full"
@@ -63,9 +86,17 @@
                     <button class="btn btn-link btn-sm" v-else @click="usePassword = true">Use traditional password</button>
                 </div>
                 <div class="grid w-full grid-cols-2 gap-2">
-                    <button @click="checkPassword" class="btn btn-primary btn-block col-span-2" v-if="usePassword">Check password</button>
+                    <button
+                        type="submit"
+                        @click="form.action = 'password'"
+                        value="link"
+                        class="btn btn-primary btn-block col-span-2"
+                        v-if="usePassword"
+                    >
+                        Check password
+                    </button>
                     <template v-else>
-                        <button class="btn btn-secondary btn-block">Send magic link</button>
+                        <button type="submit" @click="form.action = 'link'" value="link" class="btn btn-secondary btn-block">Send magic link</button>
                         <button class="btn btn-primary btn-block">Use passkey</button>
                     </template>
                 </div>
@@ -99,7 +130,7 @@
                     </a>
                 </div>
                 <a href="#" class="btn btn-link">Not a member yet?</a>
-            </div>
+            </form>
         </div>
     </div>
 </template>
