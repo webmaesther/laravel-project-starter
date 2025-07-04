@@ -89,35 +89,4 @@ return [
 
     'sandbox' => env('PADDLE_SANDBOX', false),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Default Paddle settings
-    |--------------------------------------------------------------------------
-    |
-    */
-    'settings' => [
-        'allowLogout' => false,
-        'allowDiscountRemoval' => false,
-        'allowedPaymentMethods' => [
-            'alipay',
-            'apple_pay',
-            'bancontact',
-            'card',
-            'google_pay',
-            'ideal',
-            'korea_local',
-            'paypal',
-            'saved_payment_methods',
-        ],
-        'displayMode' => 'overlay',
-        'frameInitialHeight' => null,
-        'frameStyle' => null,
-        'frameTarget' => null,
-        'locale' => 'en',
-        'showAddDiscounts' => false,
-        'showAddTaxId' => true,
-        'theme' => 'dark', // or 'light'
-        'variant' => 'one-page',
-    ],
-
 ];

@@ -6,13 +6,10 @@ use App\Enums\SocialiteDriver;
 use App\Http\Controllers\Identity\CallbackController;
 use App\Http\Controllers\Identity\RedirectController;
 use App\Http\Controllers\LoginLinkController;
-use App\Http\Middleware\InitializePaddle;
 use App\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => inertia('Landing', [
-    'plans' => config('subscription.plans'),
-]))->middleware(InitializePaddle::class)->name('home');
+Route::get('/', fn () => inertia('Landing'))->name('home');
 
 Route::prefix('{driver}')
     ->whereIn('driver', SocialiteDriver::cases())
