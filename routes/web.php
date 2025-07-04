@@ -3,13 +3,16 @@
 declare(strict_types=1);
 
 use App\Enums\SocialiteDriver;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\Identity\CallbackController;
 use App\Http\Controllers\Identity\RedirectController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LoginLinkController;
 use App\Http\Middleware\RedirectLocalHost;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => inertia('Landing'))->name('home');
+Route::get('/', LandingPageController::class)->name('landing');
+Route::get('/home', HomePageController::class)->name('home');
 
 Route::prefix('{driver}')
     ->whereIn('driver', SocialiteDriver::cases())
