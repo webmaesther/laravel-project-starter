@@ -7,6 +7,7 @@ use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\User;
 use App\Policies\UserPolicy;
+use App\States\AdminUser;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\Testing\TestAction;
@@ -27,7 +28,7 @@ covers(UserPolicy::class);
 describe('User Listing', function (): void {
 
     beforeEach(function (): void {
-        actingAs(User::factory()->admin()->create());
+        actingAs(User::factory()->create(new AdminUser()));
     });
 
     test('page loads', function (): void {

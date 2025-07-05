@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\LoginLinkController;
 use App\Models\User;
 use App\Notifications\MagicLink;
+use App\States\DefaultPasswordUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -18,17 +19,16 @@ use function Pest\Laravel\travel;
 covers([
     MagicLink::class,
     LoginLinkController::class,
+    DefaultPasswordUser::class,
 ]);
 
 describe('Login', function (): void {
     test('users can log in with their email and password', function (): void {
-        $user = User::factory()->create([
-            'password' => User::DEFAULT_PASSWORD,
-        ]);
+        $user = User::factory()->create(new DefaultPasswordUser());
 
         post(route('login.store'), [
             'email' => $user->email,
-            'password' => User::DEFAULT_PASSWORD,
+            'password' => DefaultPasswordUser::PASSWORD,
         ])->assertRedirectToRoute('dashboard')
             ->assertSessionHasNoErrors();
 

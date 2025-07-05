@@ -6,6 +6,7 @@ namespace App\Filament\Resources\Users\Pages;
 
 use App\Filament\Resources\Users\UserResource;
 use App\Models\User;
+use App\States\DefaultPasswordUser;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Icons\Heroicon;
@@ -17,11 +18,11 @@ final class CreateUser extends CreateRecord
     public function autofill(): void
     {
         /** @var array<model-property<User>,mixed> $data */
-        $data = User::factory()->make()->toArray();
+        $data = User::factory()->make(new DefaultPasswordUser())->toArray();
         $this->form->fill([
             ...$data,
-            'password' => User::DEFAULT_PASSWORD,
-            'password_confirmation' => User::DEFAULT_PASSWORD,
+            'password' => DefaultPasswordUser::PASSWORD,
+            'password_confirmation' => DefaultPasswordUser::PASSWORD,
         ]);
     }
 
