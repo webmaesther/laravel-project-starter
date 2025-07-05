@@ -1,17 +1,4 @@
-<script setup lang="ts">
-    defineProps<{
-        plans: {
-            id: string;
-            label: string;
-            prices: {
-                id: string;
-                label: string;
-            }[];
-            features: string[];
-            button: string;
-        }[];
-    }>();
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <div class="hero min-h-screen bg-(image:--bg-image-light) dark:bg-(image:--bg-image-dark)">
