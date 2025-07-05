@@ -7,6 +7,7 @@ use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\User;
 use App\Policies\UserPolicy;
+use App\States\AdminUser;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -27,9 +28,11 @@ covers(CreateUser::class);
 
 covers(UserPolicy::class);
 
+covers(AdminUser::class);
+
 describe('User Creating', function (): void {
     beforeEach(function (): void {
-        actingAs(User::factory()->admin()->create());
+        actingAs(User::factory()->create(new AdminUser()));
     });
 
     test('page loads', function (): void {

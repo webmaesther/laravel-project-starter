@@ -7,6 +7,7 @@ use App\Filament\Resources\Users\Schemas\UserInfolist;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\User;
 use App\Policies\UserPolicy;
+use App\States\AdminUser;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Livewire\livewire;
@@ -21,7 +22,7 @@ covers(UserPolicy::class);
 describe('User Viewing', function (): void {
 
     beforeEach(function (): void {
-        actingAs(User::factory()->admin()->create());
+        actingAs(User::factory()->create(new AdminUser()));
     });
 
     it('page loads', function (): void {

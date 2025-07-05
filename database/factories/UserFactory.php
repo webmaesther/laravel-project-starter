@@ -35,15 +35,8 @@ final class UserFactory extends Factory
                     ->append(fake()->freeEmailDomain())
                     ->toString();
             },
-            'password' => User::DEFAULT_PASSWORD,
+            'password' => fake()->password(),
         ];
-    }
-
-    public function admin(): self
-    {
-        return $this->state([
-            'email' => User::ADMIN_EMAIL,
-        ]);
     }
 
     public function unverified(): self

@@ -7,6 +7,7 @@ use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\User;
 use App\Policies\UserPolicy;
+use App\States\AdminUser;
 use Filament\Actions\Action;
 use Illuminate\Auth\Notifications\VerifyEmail;
 
@@ -25,7 +26,7 @@ covers(UserPolicy::class);
 describe('User Editing', function (): void {
 
     beforeEach(function (): void {
-        actingAs(User::factory()->admin()->create());
+        actingAs(User::factory()->create(new AdminUser()));
     });
 
     test('page loads', function (): void {

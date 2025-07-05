@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\States\AdminUser;
 use Illuminate\Database\Seeder;
 
 final class UserSeeder extends Seeder
@@ -14,9 +15,6 @@ final class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Eszter Czotter',
-            'email' => 'eszter.czotter@gmail.com',
-        ]);
+        User::factory()->create(new AdminUser());
     }
 }
