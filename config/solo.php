@@ -47,15 +47,16 @@ return [
     */
     'commands' => [
         // Environment...
-        'HTTP' => Command::from('php artisan serve'),
-        'SSR' => Command::from('php artisan inertia:start-ssr')->lazy(),
-        'Tinker' => Command::from('php artisan tinker')->interactive(),
+        'HTTP' => Command::from('php artisan serve --ansi'),
+        'Octane' => Command::from('php artisan octane:start --watch --ansi')->lazy(),
+        'SSR' => Command::from('php artisan inertia:start-ssr --ansi')->lazy(),
+        'Tinker' => Command::from('php artisan tinker --ansi')->interactive(),
         'Sail' => Command::from('vendor/bin/sail up')->interactive(),
-        'Pail' => Command::from('php artisan pail -vv'),
-        'Dumps' => Command::from('php artisan solo:dumps'),
-        'Horizon' => Command::from('php artisan horizon'),
-        'Reverb' => Command::from('php artisan reverb:start --debug'),
-        'Tasks' => Command::from('php artisan schedule:work'),
+        'Pail' => Command::from('php artisan pail --ansi'),
+        'Dumps' => Command::from('php artisan solo:dumps --ansi'),
+        'Horizon' => Command::from('php artisan horizon --ansi'),
+        'Reverb' => Command::from('php artisan reverb:start --debug --ansi'),
+        'Tasks' => Command::from('php artisan schedule:work --ansi'),
 
         // Tests...
         'Pest' => Command::from('vendor/bin/pest --watch=app,src,routes,tests')->lazy(),
@@ -63,11 +64,11 @@ return [
 
         // Validators
         'Types' => Command::from('npm run type:check')->lazy(),
-        'Peck' => Command::from('vendor/bin/peck')->lazy(),
+        'Peck' => Command::from('vendor/bin/peck --ansi')->lazy(),
 
         // Helpers...
-        'Rector' => Command::from('vendor/bin/rector')->lazy(),
-        'Pint' => Command::from('vendor/bin/pint')->lazy(),
+        'Rector' => Command::from('vendor/bin/rector --ansi')->lazy(),
+        'Pint' => Command::from('vendor/bin/pint --ansi')->lazy(),
         'Eslint' => Command::from('npm run lint')->lazy(),
         'Prettier' => Command::from('npm run format')->lazy(),
 
