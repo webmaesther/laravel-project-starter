@@ -103,6 +103,13 @@
             "Composer\\Config::disableProcessTimeout",
             "@php artisan solo"
         ],
+        "test": [
+            "@peck:check",
+            "@lint:check",
+            "@phpstan:check",
+            "@pest:check",
+            "@deps:check"
+        ],
         "test:deps": [
             "@composer install --ansi --no-interaction --prefer-dist --optimize-autoloader",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
@@ -113,11 +120,12 @@
             "@php artisan migrate --ansi",
             "@php artisan optimize:clear --ansi"
         ],
-        "test": [
-            "@peck:check",
-            "@lint:check",
-            "@phpstan:check",
-            "@pest:check"
+        "deps:check": [
+            "@composer show -o --strict --direct"
+        ],
+        "deps:bump": [
+            "@composer update",
+            "@composer bump"
         ],
         "pest:quick": [
             "pest --parallel"
