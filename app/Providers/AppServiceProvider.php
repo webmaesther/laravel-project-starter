@@ -35,18 +35,11 @@ final class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureEloquent();
-        $this->configureVite();
-        $this->configureCarbon();
+        $this->configureDatabase();
         $this->configurePasswords();
-        $this->configureHttps();
-
-        if ($this->app->runningUnitTests()) {
-            $this->configureTestingEnvironment();
-        }
-
-        if ($this->app->isProduction()) {
-            $this->configureProductionEnvironment();
-        }
+        $this->configureHttp();
+        $this->configureTime();
+        $this->configureVite();
     }
 
     private function configureEloquent(): void
@@ -58,30 +51,26 @@ final class AppServiceProvider extends ServiceProvider
         Model::automaticallyEagerLoadRelationships();
     }
 
-    private function configureTestingEnvironment(): void
-    {
-        Sleep::fake();
-        Http::preventStrayRequests();
-    }
-
     private function configureVite(): void
     {
         Vite::useAggressivePrefetching();
     }
 
-    private function configureCarbon(): void
+    private function configureTime(): void
     {
         Date::use(CarbonImmutable::class);
+        Sleep::fake($this->app->runningUnitTests());
     }
 
-    private function configureHttps(): void
+    private function configureHttp(): void
     {
         URL::forceHttps();
+        Http::preventStrayRequests($this->app->runningUnitTests());
     }
 
-    private function configureProductionEnvironment(): void
+    private function configureDatabase(): void
     {
-        DB::prohibitDestructiveCommands();
+        DB::prohibitDestructiveCommands($this->app->isProduction());
     }
 
     private function configurePasswords(): void
