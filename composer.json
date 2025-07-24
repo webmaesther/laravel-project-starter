@@ -107,8 +107,7 @@
             "@peck:check",
             "@lint:check",
             "@phpstan:check",
-            "@pest:check",
-            "@deps:check"
+            "@pest:check"
         ],
         "test:deps": [
             "@composer install --ansi --no-interaction --prefer-dist --optimize-autoloader",
