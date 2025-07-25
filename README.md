@@ -2,7 +2,9 @@
 
 [![Production](https://github.com/webmaesther/laravel-project-starter/actions/workflows/production.yml/badge.svg)](https://github.com/webmaesther/laravel-project-starter/actions/workflows/production.yml)
 [![Staging](https://github.com/webmaesther/laravel-project-starter/actions/workflows/staging.yml/badge.svg)](https://github.com/webmaesther/laravel-project-starter/actions/workflows/staging.yml)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Nightly](https://github.com/webmaesther/laravel-project-starter/actions/workflows/nightly.yml/badge.svg)](https://github.com/webmaesther/laravel-project-starter/actions/workflows/nightly.yml)
+
+[![Commitizen Friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 
 ## Requirements
