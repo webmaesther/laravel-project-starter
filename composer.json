@@ -123,7 +123,7 @@
             "@php artisan optimize:clear --ansi"
         ],
         "deps:check": [
-            "@composer show -o --strict --direct"
+            "@composer show -o --strict --direct --locked"
         ],
         "deps:bump": [
             "@composer update",

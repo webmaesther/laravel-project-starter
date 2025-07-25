@@ -18,9 +18,10 @@
     "e2e:check": "playwright test",
     "e2e:rec": "playwright test codegen",
     "deps:bump": "npm-check-updates --format=group --interactive",
-    "deps:check": "npm-check-updates",
-    "test": "$npm_execpath run type:check && $npm_execpath run lint:check && $npm_execpath run format:check && $npm_execpath run test:check",
-    "check": "$npm_execpath run type:check && $npm_execpath run lint:check && $npm_execpath run format:check && $npm_execpath run test:check && $npm_execpath run e2e:check"
+    "deps:check": "npx npm-check-updates",
+    "audit:check": "$npm_execpath audit report --package-lock-only --omit=dev",
+    "test": "$npm_execpath run type:check && $npm_execpath run lint:check && $npm_execpath run format:check && $npm_execpath run test:check && $npm_execpath run audit:check",
+    "check": "$npm_execpath run type:check && $npm_execpath run lint:check && $npm_execpath run format:check && $npm_execpath run test:check && $npm_execpath run audit:check && $npm_execpath run e2e:check"
   },
   "dependencies": {
     "@inertiajs/vue3": "^2.0.17",
