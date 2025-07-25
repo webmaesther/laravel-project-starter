@@ -17,30 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          tools: composer:v2
-          coverage: pcov
-
       - name: Install Aspell
         uses: ConorMacBride/install-package@v1
         with:
           apt: aspell
 
-      - name: Get Composer Cache Directory
-        id: composer_cache_directory
-        run: echo dir=$(composer config cache-files-dir) >> $GITHUB_OUTPUT
+      - name: Prepare Composer
+        uses: ./.github/actions/composer-install
 
-      - name: Cache Composer Dependencies
-        uses: actions/cache@v4
-        with:
-          key: composer-cache-${{ hashFiles('./composer.lock') }}
-          path: ${{ steps.composer_cache_directory.outputs.dir }}
-          restore-keys: composer-cache-
-
-      - name: Install Composer Dependencies
+      - name: Prepare Environment
         run: composer test:deps
 
       - name: Prepare Tests

@@ -80,6 +80,9 @@
         }
     },
     "scripts": {
+        "install:ci": [
+            "@composer install --ansi --no-interaction --prefer-dist --optimize-autoloader"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
@@ -104,13 +107,13 @@
             "@php artisan solo"
         ],
         "test": [
+            "@audit:check",
             "@peck:check",
             "@lint:check",
             "@phpstan:check",
             "@pest:check"
         ],
         "test:deps": [
-            "@composer install --ansi --no-interaction --prefer-dist --optimize-autoloader",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php -r \"file_exists('database/testing.sqlite') || touch('database/testing.sqlite');\""
         ],
@@ -171,6 +174,9 @@
         ],
         "wayfinder:gen": [
             "@php artisan wayfinder:generate"
+        ],
+        "audit:check": [
+            "@composer audit --locked --no-dev -f summary"
         ]
     },
     "extra": {

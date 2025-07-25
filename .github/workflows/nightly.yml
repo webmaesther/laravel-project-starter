@@ -1,0 +1,29 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # daily at 8 am UTC
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare Composer
+        uses: ./.github/actions/composer-install
+
+      - name: Audit Packages
+        run: composer audit:check
+  deps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare Composer
+        uses: ./.github/actions/composer-install
+
+      - name: Check for Outdated Packages
+        run: composer deps:check
