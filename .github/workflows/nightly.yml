@@ -2,7 +2,7 @@ name: Nightly
 
 on:
   schedule:
-    - cron: '0 8 * * *' # daily at 8 am UTC
+    - cron: '0 8 * * 1-5' # on weekdays at 8 am UTC
 
 jobs:
   audit:

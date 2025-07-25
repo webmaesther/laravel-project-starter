@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59d024c9cc8a6b8d6221a04038e1a60b",
+    "content-hash": "f622d993159ee722b99e821c6d4a1e3e",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -4940,16 +4940,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.9.0",
+            "version": "2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6"
+                "reference": "fcf91eb64359852f00d921887b219479b4f21251"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
-                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/fcf91eb64359852f00d921887b219479b4f21251",
+                "reference": "fcf91eb64359852f00d921887b219479b4f21251",
                 "shasum": ""
             },
             "require": {
@@ -5001,9 +5001,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
+                "source": "https://github.com/Masterminds/html5-php/tree/2.10.0"
             },
-            "time": "2024-03-31T07:05:07+00:00"
+            "time": "2025-07-25T09:04:22+00:00"
         },
         {
             "name": "moneyphp/money",
@@ -12481,16 +12481,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v5.10.1",
+            "version": "v5.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "22955730e5b283b94486ea844736b01ead2da629"
+                "reference": "6d249d93ab06dc147ac62ea02b4272c2e7a24b72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/22955730e5b283b94486ea844736b01ead2da629",
-                "reference": "22955730e5b283b94486ea844736b01ead2da629",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/6d249d93ab06dc147ac62ea02b4272c2e7a24b72",
+                "reference": "6d249d93ab06dc147ac62ea02b4272c2e7a24b72",
                 "shasum": ""
             },
             "require": {
@@ -12544,9 +12544,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/telescope/issues",
-                "source": "https://github.com/laravel/telescope/tree/v5.10.1"
+                "source": "https://github.com/laravel/telescope/tree/v5.10.2"
             },
-            "time": "2025-07-22T13:56:09+00:00"
+            "time": "2025-07-24T05:26:13+00:00"
         },
         {
             "name": "mockery/mockery",
