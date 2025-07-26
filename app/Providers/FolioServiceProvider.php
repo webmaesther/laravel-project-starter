@@ -7,6 +7,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Folio\Folio;
 
+// @codeCoverageIgnoreStart
+
 final class FolioServiceProvider extends ServiceProvider
 {
     /**
@@ -29,3 +31,5 @@ final class FolioServiceProvider extends ServiceProvider
         ]);
     }
 }
+
+// @codeCoverageIgnoreEnd

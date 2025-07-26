@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
     <div>
         <div class="navbar bg-base-200 shadow-sm">

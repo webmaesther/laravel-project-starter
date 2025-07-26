@@ -9,6 +9,8 @@ use Filament\Panel;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
+// @codeCoverageIgnoreStart
+
 final class FilamentServiceProvider extends ServiceProvider
 {
     /**
@@ -27,3 +29,5 @@ final class FilamentServiceProvider extends ServiceProvider
         Gate::policy(Panel::class, PanelPolicy::class);
     }
 }
+
+// @codeCoverageIgnoreEnd

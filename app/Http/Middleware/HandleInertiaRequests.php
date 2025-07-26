@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Override;
 
+// @codeCoverageIgnoreStart
+
 final class HandleInertiaRequests extends Middleware
 {
     /**
@@ -52,3 +54,5 @@ final class HandleInertiaRequests extends Middleware
         ];
     }
 }
+
+// @codeCoverageIgnoreEnd
