@@ -12,14 +12,13 @@
 - [PHP](https://phpmon.app/) > 8.4
   - Extensions
     - pcov
-    - plus the ones in composer.json
-  - Libraries
-    - curl
+    - redis
 - [curl](https://everything.curl.dev/install/macos.html) > 8.6
 - [Composer](https://getcomposer.org/download/) > 2.8
 - [NodeJS](https://nodejs.org/en/download) > 22.14
 - [Docker](https://www.docker.com/) > 4.41
 - [screen](https://formulae.brew.sh/formula/screen) > v5
+- [aspell](https://formulae.brew.sh/formula/aspell) > 3.1
 
 ## Installation
 
