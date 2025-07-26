@@ -21,7 +21,7 @@
         "laravel/horizon": "^5.33.1",
         "laravel/nightwatch": "^1.11.4",
         "laravel/octane": "^2.12",
-        "laravel/pennant": "^1.17.1",
+        "laravel/pennant": "^1.18.0",
         "laravel/pulse": "^1.4.3",
         "laravel/reverb": "^1.5.1",
         "laravel/sanctum": "^4.2.0",
